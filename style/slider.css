@@ -1,0 +1,31 @@
+#production-year-slider, #add-date-slider {
+    height: 1rem;
+    font-size: 1rem;
+    margin-top: 2rem;
+
+    width: 50%;
+}
+
+#production-year-slider > .ui-slider-handle, #add-date-slider > .ui-slider-handle {
+    transform: translateY(-50%);
+    top: 0;
+    border-radius: 100%;
+    border: none;
+    background: white;
+}
+
+#production-year-slider > .ui-slider-handle:focus-visible, #add-date-slider > .ui-slider-handle:focus-visible {
+    outline: none;
+
+}
+
+#production-year-slider > .ui-slider-range, #add-date-slider > .ui-slider-range {
+    border: none;
+    border-bottom: 1px solid var(--primary-color);
+}
+
+#production-year-slider, #add-date-slider {
+    height: 0;
+    border: none;
+    border-bottom: 1px solid #FFFFFF;
+}

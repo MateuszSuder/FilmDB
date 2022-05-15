@@ -1,9 +1,17 @@
+import {watchers} from "./slider.js";
+import {dateParser} from "./utils.js";
+
 $(document).ready(() => {
     init();
 })
 
 const init = () => {
-    $('#production-year-label').text($('#production-year').val());
+    const productionSlider = $( "#production-year-slider" );
+    const addDateSlider = $( "#add-date-slider" );
+    $( "#production-year" ).text(productionSlider.slider( "values", 0 ) +
+        " - " + productionSlider.slider( "values", 1 ) );
+    $( "#add-date" ).text(dateParser(addDateSlider.slider( "values", 0 )) +
+        " - " + dateParser(addDateSlider.slider( "values", 1 )));
 
     $('#add-date-label')
         .text(dateParser($('#add-date')
@@ -17,29 +25,6 @@ const init = () => {
     })
 
     watchers();
-}
-
-const watchers = () => {
-    $('#production-year').on('input', function() {
-        $('#production-year-label').text($(this).val());
-    })
-
-    $('#add-date').on('input', function() {
-        const date = dateParser($(this).val());
-        $('#add-date-label').text(date);
-    })
-}
-
-/**
- *
- * @param timestamp of date to parse
- * @returns {string} date in YYYY-MM-DD format
- */
-const dateParser = (timestamp) => {
-    if(typeof timestamp === 'string') timestamp = parseInt(timestamp);
-    const date = new Date(timestamp);
-
-    return `${date.getFullYear()}-${(date.getMonth() + 1) < 10 ? `0${date.getMonth() + 1}` : date.getMonth()}-${(date.getDate()) < 10 ? `0${date.getDate()}` : date.getDate()}`;
 }
 
 /**

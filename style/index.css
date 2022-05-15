@@ -1,9 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Anaheim&display=swap');
 
-:root {
-    --primary-color: #005662;
-    --gray-accent: #808080;
-}
 
 * {
     margin: 0;
@@ -57,6 +53,8 @@ header {
 #logo > #logo-title {
     font-size: 4rem;
 }
+
+
 
 .frame {
     width: 100vw;

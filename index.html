@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="initial-scale=0.86, maximum-scale=1.0, minimum-scale=1">
+    <link rel="stylesheet" href="/style/global.css">
     <link rel="stylesheet" href="/style/index.css">
+    <link rel="stylesheet" href="/style/slider.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
     <title>FilmDB</title>
 </head>
 <body>
@@ -31,13 +34,17 @@
             <div class="filter-container">
                 <div class="filters">
                     <div class="release-year border grid-item-center">
-                        <label for="production-year">Rok premiery: <span id="production-year-label"></span></label>
-                        <input type="range" min="1980" max="2022" step="1" name="production-year" id="production-year" value="1980">
+                        <p>
+                            <div>Rok premiery: <span id="production-year"></span></div>
+                        </p>
+                        <div class="slider-range" id="production-year-slider"></div>
                     </div>
                     
                     <div class="date-added border grid-item-center">
-                        <label for="add-date">Data dodania: <span id="add-date-label"></span></label>
-                        <input type="range" name="add-date" id="add-date">
+                        <p>
+                            <div>Data dodania: <span id="add-date"></span></div>
+                        </p>
+                        <div class="slider-range" id="add-date-slider"></div>
                     </div>
                     <div class="lists">
                         <label for="film-genre" class="custom-select">
@@ -76,5 +83,5 @@
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
         crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-<script src="src/index.js" defer></script>
+<script src="src/index.js" defer type="module"></script>
 </html>
