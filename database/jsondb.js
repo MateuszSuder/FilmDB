@@ -290,18 +290,6 @@ export class TableColumn {
     unique;
 
     /**
-     * @type {number|undefined};
-     * @const
-     */
-    minLength;
-
-    /**
-     * @type {number|undefined};
-     * @const
-     */
-    maxLength;
-
-    /**
      * @param {ColumnSchema} columnInput
      */
     constructor(columnInput) {
@@ -312,8 +300,6 @@ export class TableColumn {
         this.type = type;
         this.required = required;
         this.unique = unique;
-        this.minLength = minLength;
-        this.maxLength = maxLength;
     }
 }
 
