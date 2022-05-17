@@ -167,8 +167,20 @@ export class Table {
         }
     }
 
-    delete(...toDelete) {
-
+    /**
+     * Delete object with given id
+     * @param id of object to delete
+     * @return {Promise<boolean>} true if deleted, false if not
+     */
+    async delete(id) {
+        let lengthBefore = this.values.length;
+        this.values = this.values.filter(element => element.id !== id);
+        if(lengthBefore === this.values.length) {
+            return false;
+        } else {
+            await this.#saveToFile();
+            return true;
+        }
     }
 
     /**

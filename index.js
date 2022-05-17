@@ -34,5 +34,5 @@ const usersColumns = [
 
 (async () => {
     const table = await db.getTable('users');
-    table.update({ id: '09fdab9b-d814-4ae1-ad21-183338d00143', update: { username: 'test2' } });
+    console.log(await table.delete('3484d2b6-30b1-42c2-8abb-42f61c295ca7'));;
 })();
