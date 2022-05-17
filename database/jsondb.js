@@ -1,79 +1,206 @@
-import { writeFile } from 'node:fs/promises';
+import {writeFile, readFile} from 'node:fs/promises';
+
+const PathLocationPrefix = './database/';
 
 /**
  * @typedef ColumnSchema
  * @type {object}
  * @property required: boolean|undefined
- * @property minLength: number|undefined
- * @property maxLength: number|undefined
+ * @property unique: boolean|undefined
  * @property type: 'boolean'|'string'|'number'
  * @property columnName: string
  */
 
-export class JsonDB {
+class JsonDB {
     /**
-     * Create new database if not exists
-     * @param {string} databaseName name of database
-     * @param {Object.<DBSchema>} schema
+     * List of available tables
+     * @type {Array.<Table>}
      */
-    static async createDatabase(databaseName, schema) {
-        let db = JsonDB.databaseExists();
-        console.log(db);
-        if(!db) {
+    tablesList = [];
+
+    /**
+     * Create new table if not exists
+     * @param {string} tableName name of table
+     * @param {Array.<ColumnSchema>} schema
+     * @return
+     */
+    async createTable(tableName, schema) {
+        let table = await this.getTable(tableName);
+        if (!table) {
             try {
-                await writeFile('./database/' + databaseName + '.json', JSON.stringify(schema.parse()), { encoding: 'utf8' });
+                table = new Table(tableName, schema);
+                await writeFile(PathLocationPrefix + tableName + '.json', JSON.stringify({columns: schema}), {encoding: 'utf8'});
             } catch (e) {
                 console.error(e);
             }
         }
-        return db;
+        return table;
     }
 
     /**
-     * Check if database exists
-     * @param databaseName name of database
+     * Check if table exists
+     * @param tableName name of table
+     * @return table or null if not exists
      */
-    static databaseExists(databaseName) {
-        return false;
+    async getTable(tableName) {
+        return this.getCachedTable(tableName) || (await this.getNotCachedTable(tableName)) || null;
     }
-}
-
-export class Database {
-
-}
-
-
-export class DBSchema {
-    /**
-     * @type {array.<ColumnSchema>}
-     */
-    columns = [];
 
     /**
-     * @param {array.<ColumnSchema>} schemaInput
+     * Check and return if exists table from cached array
+     * @param tableName name of table to search
+     * @return {null|Table}
      */
-    constructor(schemaInput) {
-        for(const column of schemaInput) {
-            this.columns.push(
-                new DBColumn(
-                    {...column}
-                )
-            );
+    getCachedTable(tableName) {
+        for (let i = 0; i < this.tablesList.length; i++) {
+            if (this.tablesList[i].name === tableName) return this.tablesList[i];
         }
+        return null;
     }
 
-    parse() {
-        let result = {};
-        for(const column of this.columns) {
-            result[column.columnName] = column;
-        }
-        return {
-            "columns": result
+    /**
+     * Search for table in files, if not found, return null
+     * @param tableName name of table to search
+     * @return {Promise<Table|null>}
+     */
+    async getNotCachedTable(tableName) {
+        try {
+            const file = await readFile(PathLocationPrefix + tableName + '.json', {encoding: 'utf8'});
+            /**
+             * @type {Table}
+             */
+            const parse = JSON.parse(file);
+            const table = new Table(tableName, parse.columns);
+            table.insert(table.values);
+            this.tablesList.push(table);
+            return table;
+        } catch (e) {
+            return null
         }
     }
 }
 
-export class DBColumn {
+export class Table {
+    /**
+     * Table name
+     * @type string
+     */
+    name;
+
+    /**
+     * Schema for columns
+     * @type {Object.<string, ColumnSchema>}
+     */
+    columns = {};
+
+    /**
+     * Values in table
+     * @type {Array.<object>}
+     */
+    values = [];
+
+    constructor(name, schemaInput) {
+        this.name = name;
+        for (const column of schemaInput) {
+            this.columns[column.columnName] = new TableColumn({...column});
+        }
+    }
+
+    /**
+     * Insert x values to table
+     * @param toInsert values to insert
+     * @return {Promise<void>}
+     */
+    async insert(...toInsert) {
+        const copy = JSON.parse(JSON.stringify(this.values));
+        try {
+            for(const entry of toInsert) {
+                if(this.validateEntry(entry)) {
+                    this.values.push({
+                        id: this.idGen(),
+                        ...entry
+                    });
+                }
+            }
+            await this.saveToFile();
+        } catch(e) {
+            this.values = copy;
+            throw e;
+        }
+
+    }
+
+    update() {
+
+    }
+
+    delete(...toDelete) {
+
+    }
+
+    /**
+     * Saves table content to file
+     * @return {Promise<void>}
+     */
+    async saveToFile() {
+        await writeFile(PathLocationPrefix + this.name + '.json', JSON.stringify({columns: this.columns, values: this.values}))
+    }
+
+    /**
+     * Validate entry
+     * @param entry
+     * @return {boolean} true if valid
+     * @throws error when column is invalid
+     */
+    validateEntry(entry) {
+        for (const columnName of Object.keys(this.columns)) {
+            const column = this.columns[columnName];
+            const columnValue = entry[column.columnName];
+            if(!columnValue) {
+                if(column.required) {
+                    throw new Error(`Column ${columnName} (${columnValue}) is missing in ${JSON.stringify(entry)}`);
+                }
+                continue;
+            }
+            if (!this.validateEntryType(column.type, columnValue)) {
+                throw new Error(`Column ${columnName} (${columnValue}) has invalid type in ${JSON.stringify(entry)}`);
+            }
+            if(column.unique) {
+                for(let i = 0; i < this.values.length; i++) {
+                    if(this.values[i][columnName] === columnValue)
+                        throw new Error(`Column ${columnName} (${columnValue}) is not unique ${JSON.stringify(entry)}`);
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Check if
+     * @param columnType required type of column
+     * @param entryValue type of entry given
+     * @return {boolean} true if valid else false
+     */
+    validateEntryType(columnType, entryValue) {
+        if(Array.isArray(columnType)) {
+            return !!columnType.some(allowedValue => allowedValue === entryValue);
+        }
+        return columnType === typeof entryValue;
+    }
+
+    /**
+     * Method generating uuid
+     * @return {string} uuid
+     */
+    idGen() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            let r = Math.random()*16|0, v = c === 'x' ? r : (r&0x3|0x8);
+            return v.toString(16);
+        });
+    }
+}
+
+export class TableColumn {
     /**
      * @type {string};
      * @const
@@ -96,6 +223,12 @@ export class DBColumn {
      * @type {number|undefined};
      * @const
      */
+    unique;
+
+    /**
+     * @type {number|undefined};
+     * @const
+     */
     minLength;
 
     /**
@@ -108,13 +241,16 @@ export class DBColumn {
      * @param {ColumnSchema} columnInput
      */
     constructor(columnInput) {
-        const {columnName, type, minLength, maxLength, required} = columnInput;
-        if(!columnName) throw new Error('Column name is required');
-        if(!type) throw new Error('Type is required');
+        const {columnName, unique, type, minLength, maxLength, required} = columnInput;
+        if (!columnName) throw new Error('Column name is required');
+        if (!type) throw new Error('Type is required');
         this.columnName = columnName;
         this.type = type;
         this.required = required;
+        this.unique = unique;
         this.minLength = minLength;
         this.maxLength = maxLength;
     }
 }
+
+export default new JsonDB();

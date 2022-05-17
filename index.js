@@ -1,10 +1,8 @@
-import {JsonDB, DBSchema} from "./database/jsondb.js";
+import db from "./database/jsondb.js";
 
 const usersColumns = [
     {
         "required": true,
-        "minLength": 3,
-        "maxLength": 12,
         "type": "string",
         "unique": true,
         columnName: "username"
@@ -16,4 +14,19 @@ const usersColumns = [
     }
 ]
 
-JsonDB.createDatabase('users', new DBSchema(usersColumns))
+db.createTable('users', usersColumns).then(async table => {
+    if(table) {
+        try {
+            await table.insert({
+                username: 'test',
+                permission: 'user'
+            },{
+                username: 'test2',
+                permission: 'user'
+            })
+        } catch (e) {
+            console.error(e.message);
+        }
+
+    }
+})
