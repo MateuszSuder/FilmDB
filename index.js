@@ -1,38 +1,14 @@
-import db from "./database/jsondb.js";
+import express from 'express';
+import 'dotenv/config';
+import home from './routes/home.js'
+import database from "./src/database/database.js";
+const app = express();
 
-const usersColumns = [
-    {
-        "required": true,
-        "type": "string",
-        "unique": true,
-        columnName: "username"
-    },
-    {
-        "required": true,
-        "type": ["user", "admin"],
-        columnName: "permission"
-    }
-];
-//
-// db.createTable('users', usersColumns).then(async table => {
-//     if(table) {
-//         try {
-//             await table.insert({
-//                 username: 'test',
-//                 permission: 'user'
-//             },{
-//                 username: 'test2',
-//                 permission: 'user'
-//             })
-//         } catch (e) {
-//             console.error(e.message);
-//         }
-//
-//     }
-// })
+app.set('view engine', 'ejs');
+app.use('/public', express.static('public'));
+app.use('/src/js', express.static('src/js'));
+app.use('/', home);
 
-
-(async () => {
-    const table = await db.getTable('users');
-    console.log(await table.delete('3484d2b6-30b1-42c2-8abb-42f61c295ca7'));;
-})();
+app.listen(process.env.PORT, () => {
+    console.log('xd');
+})

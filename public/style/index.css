@@ -1,0 +1,312 @@
+@import url('https://fonts.googleapis.com/css2?family=Anaheim&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    line-height: 1em;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 12px;
+}
+
+body {
+    background-color: #E1E2E1;
+    font-family: 'Anaheim', serif !important;
+    font-style: normal;
+    font-weight: 400;
+}
+
+input, select, textarea, button {
+    font-family: inherit;
+}
+
+input:focus, select:focus {
+    outline: none;
+}
+
+header {
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    background-color: var(--primary-color);
+    z-index: 1;
+}
+
+#header {
+    height: 5vh;
+    min-height: 56px;
+}
+
+#logo {
+    display: flex;
+    flex-direction: row;
+}
+
+#logo > #logo-title {
+    font-size: 4rem;
+}
+
+
+
+.frame {
+    width: 100vw;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 5fr 1fr;
+    grid-auto-flow: column;
+    align-items: center;
+    justify-items: center;
+}
+
+.search-container {
+    background-color: white;
+    width: 80%;
+    height: 4vh;
+    min-height: 40px;
+    font-size: 1.5rem;
+    color: #819CA9;
+    border-radius: 5px;
+}
+
+#search-icon {
+    margin: 0 1vw 0 0.5vw;
+}
+.primary-color {
+    color: white;
+}
+
+.vertical-align {
+    display: flex;
+    align-items: center;
+
+}
+
+.login {
+    font-size: 2.5rem;
+    color: white;
+}
+
+#login-icon {
+    margin-left: 0.5vw;
+}
+
+.frame-2 {
+    width: 940px;
+    background: rgba(255, 255, 255, 0.3);
+    margin: 5vh auto auto;
+}
+
+.filter-container {
+    padding: 4rem 4rem 0;
+    margin-bottom: 4rem;
+
+    border-bottom: solid var(--gray-accent) 1px;
+}
+
+.filters {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 3rem;
+    grid-auto-flow: column;
+    text-align: center;
+    font-size: 2rem;
+
+    padding-bottom: 3rem;
+}
+
+.release-year {
+    grid-column: 1;
+    width: 100%;
+    height: 100%;
+}
+
+.date-added {
+    grid-column: 2;
+    width: 100%;
+    height: 100%;
+}
+
+.grid-item-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+label + input {
+    margin-top: 2vh;
+}
+
+.lists {
+    height: 100%;
+    width: 80%;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    gap: 3rem;
+}
+
+.border {
+    border: 1px solid var(--gray-accent);
+    box-sizing: border-box;
+    box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+::placeholder {
+    padding-left: 10%;
+}
+
+.buttons {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-self: flex-end;
+}
+
+.buttons input[type='button'] {
+    border: none;
+    outline: none;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    font-size: 1.66rem;
+
+    padding: 11px 54px 11px 54px;
+}
+
+#reset {
+    background: white;
+}
+
+#filter {
+    background: var(--primary-color);
+    color: white;
+}
+
+#movies-list {
+    padding: 0 10% 10%;
+}
+
+.movie-info {
+    background: white;
+    border: 1px solid var(--gray-accent);
+    box-sizing: border-box;
+    padding: 2rem;
+    margin: 0 auto 4rem;
+}
+
+.movie-title {
+    margin-top: 2vh;
+    font-size: 2.5rem;
+    color: var(--primary-color);
+}
+
+.movie-description {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+                "gatunek ."
+                "kraj-produkcji data-dodania"
+                "rok-produkcji rezyser";
+    gap: 1.5rem;
+    margin-top: 2rem;
+    font-size: 1rem;
+    color: var(--gray-accent);
+    grid-auto-flow: column;
+}
+
+.movie-description > *:nth-child(1) {
+    grid-area: gatunek;
+}
+
+.movie-description > *:nth-child(2) {
+    grid-area: kraj-produkcji;
+}
+
+.movie-description > *:nth-child(3) {
+    grid-area: rok-produkcji;
+}
+
+.movie-description > *:nth-child(4) {
+    grid-area: data-dodania;
+}
+
+.movie-description > *:nth-child(5) {
+    grid-area: rezyser;
+}
+
+.key-value {
+    display: grid;
+    flex-direction: row;
+    grid-template-columns: minmax(100px, max-content) 1fr;
+
+    font-size: 1.2rem;
+}
+
+.key-value *:nth-child(2) {
+    color: black;
+
+    font-size: 1.5rem;
+}
+
+.custom-select {
+    position: relative;
+    width: 100%;
+}
+
+.custom-select::after {
+    content: "";
+    position: absolute;
+    bottom: 50%;
+    right: 5%;
+    width: 8px;
+    height: 8px;
+    transition: all 0.5s;
+
+    border-bottom: solid 2px var(--primary-color);
+    border-right: solid 2px var(--primary-color);
+
+    transform: rotate(45deg) translateY(50%);
+}
+
+.custom-select select {
+    -webkit-appearance: none;
+    padding: 12px 40px 12px 18px;
+    width: 100%;
+    border: 1px solid var(--gray-accent);
+    box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+    background: transparent;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1.5rem;
+    transition: all 150ms ease;
+}
+
+
+@media only screen and (min-width: 1367px) {
+    .frame {
+        width: 75vw;
+    }
+}
+
+@media only screen and (min-width: 2560px) {
+    .frame {
+        width: 50vw;
+    }
+}
