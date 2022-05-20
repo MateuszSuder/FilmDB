@@ -1,3 +1,4 @@
 export const homeView = (req, res) => {
-    res.render('home', {});
+    req.session
+    res.render('layout', { page: 'home' });
 }

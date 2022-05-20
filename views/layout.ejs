@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=0.86, maximum-scale=1.0, minimum-scale=1">
+    <link rel="stylesheet" href="/public/style/global.css">
+    <link rel="stylesheet" href="/public/style/index.css">
+    <link rel="stylesheet" href="/public/style/slider.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+    <title>FilmDB</title>
+</head>
+<body>
+<header>
+    <div class="frame" id="header">
+        <div id="logo">
+            <span id="logo-title" class="primary-color vertical-align">FilmDB</span>
+            <figure>
+                <img src="/public/assets/Logo.svg" alt="Logo" class="vertical-align" id="logo-img">
+            </figure>
+        </div>
+        <div class="search-container vertical-align">
+            <img id="search-icon" src="/public/assets/Search.svg" alt="Search">
+            <span class="search">Szukaj filmów</span>
+        </div>
+        <div class="login vertical-align">
+            Login
+            <img id="login-icon" src="/public/assets/Login.svg" alt="Login">
+        </div>
+    </div>
+</header>
+<main>
+    <div class="frame-2">
+        <%- include(page); %>
+    </div>
+</main>
+</body>
+<script
+        src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+<script src="../src/js/index.js" defer type="module"></script>
+</html>
