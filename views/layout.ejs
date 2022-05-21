@@ -31,7 +31,8 @@
 </header>
 <main>
     <div class="frame-2">
-        <%- include(page); %>
+        <% const dir = process.cwd() + '/' %>
+        <%- include(dir + page) %>
     </div>
 </main>
 </body>
