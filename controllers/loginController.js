@@ -19,13 +19,14 @@ export const loginUser = async (req, res) => {
 
   try {
     const u = new User(login, password);
+    /**
+     * @type {Array<Object.<User>> | undefined}
+     */
     const result = await u.searchUserInDB();
 
-    if(result.length === 0) throw new Error(`Niepoprawny login`);
+    await checkData(result, u.password);
 
-    const validation = await bcrypt.compare(password, result[0].password);
-
-    if(!validation) throw new Error(`Niepoprawne hasło`);
+    req.session.user = result[0];
 
     res.redirect('/');
   } catch (e) {
@@ -41,4 +42,20 @@ export const loginUser = async (req, res) => {
       errors: [e.message]
     })
   }
+}
+
+/**
+ * @param {Array<Object.<User>> | undefined} result user get from db
+ * @param { string } password password from body
+ * @throws error if invalid input
+ * @return void
+ */
+const checkData = async (result, password) => {
+  if(!result) throw new Error(`Nieznany błąd`);
+  if(result.length === 0) throw new Error(`Niepoprawny login`);
+
+  const validation = await bcrypt.compare(password, result[0].password);
+
+  if(!validation) throw new Error(`Niepoprawne hasło`);
+  if(result[0].isBlocked) throw new Error(`Niepoprawne hasło`);
 }

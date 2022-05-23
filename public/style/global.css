@@ -81,7 +81,7 @@ input[type="submit"] {
 }
 
 .d-none {
-  display: none;
+  display: none !important;
 }
 
 input[type="text"],

@@ -82,14 +82,24 @@
 				<div
 					class="login vertical-align"
 					id="login-button"
-					name="login-button"
+					name="<%= user ? 'menu-button' : 'login-button' %>"
 				>
-					Login
-					<img
-						id="login-icon"
-						src="/public/assets/Login.svg"
-						alt="Login"
-					/>
+					<%-
+						user ?
+							`<img
+								id="user-icon"
+								src="/public/assets/User-icon.svg"
+								alt="User"
+							/>`
+							:
+							`Login
+								<img
+									id="login-icon"
+									src="/public/assets/Login.svg"
+									alt="Login"
+								/>`
+					%>
+
 				</div>
 			</div>
 		</header>

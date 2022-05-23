@@ -1,8 +1,24 @@
 import db from '../src/database/database.js'
 import bcrypt from 'bcrypt'
 
+
 export default class User {
-	login; password;
+	/**
+	 * @type string
+	 */
+	login;
+	/**
+	 * @type string
+	 */
+	password;
+	/**
+	 * @type { 0 | 1 }
+	 */
+	isBlocked;
+	/**
+	 * @type { 'user' | 'admin' }
+	 */
+	permission;
 
 
 	constructor(login, password) {
