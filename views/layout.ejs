@@ -1,45 +1,109 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="initial-scale=0.86, maximum-scale=1.0, minimum-scale=1">
-    <link rel="stylesheet" href="/public/style/global.css">
-    <link rel="stylesheet" href="/public/style/index.css">
-    <link rel="stylesheet" href="/public/style/slider.css">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
-    <title>FilmDB</title>
-</head>
-<body>
-<header>
-    <div class="frame" id="header">
-        <div id="logo">
-            <span id="logo-title" class="primary-color vertical-align">FilmDB</span>
-            <figure>
-                <img src="/public/assets/Logo.svg" alt="Logo" class="vertical-align" id="logo-img">
-            </figure>
-        </div>
-        <div class="search-container vertical-align">
-            <img id="search-icon" src="/public/assets/Search.svg" alt="Search">
-            <span class="search">Szukaj filmów</span>
-        </div>
-        <div class="login vertical-align">
-            Login
-            <img id="login-icon" src="/public/assets/Login.svg" alt="Login">
-        </div>
-    </div>
-</header>
-<main>
-    <div class="frame-2">
-        <% const dir = process.cwd() + '/' %>
-        <%- include(dir + page) %>
-    </div>
-</main>
-</body>
-<script
-        src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-        crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-<script src="../src/js/index.js" defer type="module"></script>
+<html lang="pl">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta
+			name="viewport"
+			content="initial-scale=0.86, maximum-scale=1.0, minimum-scale=1"
+		/>
+		<link rel="stylesheet" href="/public/style/global.css" />
+		<link rel="stylesheet" href="/public/style/index.css" />
+		<link rel="stylesheet" href="/public/style/slider.css" />
+		<link rel="stylesheet" href="/public/style/login.css" />
+		<link
+			rel="stylesheet"
+			href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css"
+		/>
+		<title>FilmDB</title>
+	</head>
+	<body>
+		<header>
+			<div class="frame no-select" id="header">
+				<div id="logo" name="logo-button">
+					<span id="logo-title" class="primary-color vertical-align"
+						>FilmDB</span
+					>
+					<figure>
+						<img
+							src="/public/assets/Logo.svg"
+							alt="Logo"
+							class="vertical-align"
+							id="logo-img"
+						/>
+					</figure>
+				</div>
+				<div id="search-container" class="vertical-align">
+					<img
+						id="search-icon"
+						src="/public/assets/Search.svg"
+						alt="Search"
+					/>
+					<span class="search">Szukaj filmów</span>
+					<div id="search-modal-container" class="d-none">
+						<div id="search-mask"></div>
+						<div id="search-modal">
+							<div>
+								<input type="text" placeholder="Tytuł" />
+								<input type="text" placeholder="Reżyser" />
+								<input type="text" placeholder="Aktor" />
+								<div>
+									<input
+										type="number"
+										placeholder="Rok premiery od"
+										min="1900"
+										max="2030"
+									/>
+									<input
+										type="number"
+										placeholder="Rok premiery do"
+										min="1900"
+										max="2030"
+									/>
+								</div>
+							</div>
+							<div>
+								<img
+									src="/public/assets/Exit.svg"
+									alt="Exit"
+									class="vertical-align"
+									id="exit"
+								/>
+								<input
+									type="button"
+									value="Szukaj"
+									id="search-button"
+									class="primary-button"
+								/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div
+					class="login vertical-align"
+					id="login-button"
+					name="login-button"
+				>
+					Login
+					<img
+						id="login-icon"
+						src="/public/assets/Login.svg"
+						alt="Login"
+					/>
+				</div>
+			</div>
+		</header>
+		<main>
+			<div class="frame-2">
+				<% const dir = process.cwd() + '/' %> <%- include(dir + page) %>
+			</div>
+		</main>
+	</body>
+	<script
+		src="https://code.jquery.com/jquery-3.6.0.min.js"
+		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+		crossorigin="anonymous"
+	></script>
+	<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+	<script src="../src/js/index.js" defer type="module"></script>
 </html>

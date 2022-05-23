@@ -1,6 +1,7 @@
 import {open} from "sqlite";
 import sqlite3 from "sqlite3";
 
+// export result of async function (database) as default
 export default await (async () => {
     // open the database
     const db = await open({
@@ -8,6 +9,7 @@ export default await (async () => {
         driver: sqlite3.Database
     })
 
+    // create needed tables if not exists
     await db.exec(
         `CREATE TABLE IF NOT EXISTS Users (
             id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
@@ -47,5 +49,17 @@ export default await (async () => {
             UNIQUE(movieId, actorID)
         )`
     );
+
+    await db.exec(
+        `CREATE TABLE IF NOT EXISTS UsersFavoriteMovies (
+            movieId INTEGER NOT NULL,
+            userId INTEGER NOT NULL,
+            FOREIGN KEY (movieId) REFERENCES Movies(id),
+            FOREIGN KEY (userId) REFERENCES Users(id),
+            UNIQUE(movieId, userId)
+        )`
+    );
+
+    // return db
     return db;
 })()

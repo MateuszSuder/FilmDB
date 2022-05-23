@@ -1,0 +1,22 @@
+#login-container {
+	padding-top: 10rem;
+}
+
+#login-form {
+	background-color: white;
+
+	width: 730px;
+	height: 464px;
+
+	margin: auto;
+
+	border-radius: 5px;
+	border: 1px solid black;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+
+	padding: 5rem 0 8rem 0;
+}
