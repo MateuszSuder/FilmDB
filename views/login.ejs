@@ -1,13 +1,18 @@
 <div id="login-container">
-    <form id="login-form">
-            <span class="header-primary">
-                <%= translations.title %>
-            </span>
-            <input type="text" placeholder="Login*"></input>
-            <input type="text" placeholder="Hasło*"></input>
-            <a href="<%= translations.href %>">
-                <%= translations.hrefText %>
-            </a>
-            <input id="login-button" type="submit" value="<%= translations.buttonText %>" class="primary-button">
+    <form id="login-form" action="<%= translations.action %>" method="POST">
+        <span class="header-primary">
+            <%= translations.title %>
+        </span>
+        <input type="text" placeholder="Login*" name="login" />
+        <input type="password" placeholder="Hasło*" name="password" />
+        <a href="<%= translations.href %>">
+            <%= translations.hrefText %>
+        </a>
+        <input id="login-button" type="submit" value="<%= translations.buttonText %>" class="primary-button">
+        <div id='login-error' class='error'>
+            <% if(typeof errors !== 'undefined') { %>
+                <%= errors %>
+            <% } %>
+        </div>
     </form>
 </div>

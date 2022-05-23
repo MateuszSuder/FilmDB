@@ -1,8 +1,12 @@
 import express from "express";
-import { registerView } from "../controllers/registerController.js";
+import {
+  registerUser,
+  registerView,
+} from "../controllers/registerController.js";
 
 const router = express.Router();
 
 router.get("/", registerView);
+router.post("/", registerUser);
 
 export default router;
