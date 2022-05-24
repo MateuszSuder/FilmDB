@@ -1,6 +1,7 @@
 import {dateParser} from "./utils.js";
 
-$( function() {
+export const slidersHandlers = function() {
+    // Create slider
     $( "#production-year-slider" ).slider({
         range: true,
         min: 1980,
@@ -18,6 +19,7 @@ $( function() {
     // Today
     const maxDate = new Date().getTime()
 
+    // Create slider
     $( "#add-date-slider" ).slider({
         range: true,
         min: minDate,
@@ -27,15 +29,4 @@ $( function() {
             $( "#add-date" ).text(dateParser(ui.values[ 0 ]) + " - " + dateParser(ui.values[ 1 ]) );
         }
     });
-} );
-
-export const watchers = () => {
-    $('#production-year').on('input', function() {
-        $('#production-year-label').text($(this).val());
-    })
-
-    $('#add-date').on('input', function() {
-        const date = dateParser($(this).val());
-        $('#add-date-label').text(date);
-    })
-}
+};

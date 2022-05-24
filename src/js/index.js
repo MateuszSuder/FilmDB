@@ -1,31 +1,32 @@
-import { watchers } from "./slider.js";
 import { dateParser } from "./utils.js";
+import { slidersHandlers } from './slider.js'
 
+// Run when document is loaded
 $(document).ready(() => {
+	slidersHandlers()
 	init();
 });
 
+// Initialization function
 const init = () => {
+	// Get sliders
 	const productionSlider = $("#production-year-slider");
 	const addDateSlider = $("#add-date-slider");
+	// Set basic values to sliders
 	$("#production-year").text(
 		productionSlider.slider("values", 0) +
 			" - " +
 			productionSlider.slider("values", 1)
 	);
-	$("#add-date").text(
+
+	// Get add-date element
+	const addDateElement = $("#add-date");
+
+	// Show slider value in add-date element
+	addDateElement.text(
 		dateParser(addDateSlider.slider("values", 0)) +
 			" - " +
 			dateParser(addDateSlider.slider("values", 1))
-	);
-
-	$("#add-date-label").text(
-		dateParser(
-			$("#add-date")
-				.attr("min", 315532800000)
-				.attr("max", new Date().getTime())
-				.val()
-		)
 	);
 
 	$.getJSON("/public/assets/movies-mocks.json", function (movies) {
@@ -35,7 +36,6 @@ const init = () => {
 	});
 
 	buttonsHandlers();
-	watchers();
 };
 
 const buttonsHandlers = () => {

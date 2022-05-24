@@ -2,6 +2,9 @@ import db from '../src/database/database.js'
 import bcrypt from 'bcrypt'
 
 
+/**
+ * Model containing user data
+ */
 export default class User {
 	/**
 	 * @type string
@@ -27,6 +30,11 @@ export default class User {
 		this.password = password;
 	}
 
+	/**
+	 * Saves user contained in object to database
+	 * @return {Promise<*>} Result of query
+	 * @throws when invalid username/password or duplicate username
+	 */
 	async saveUserToDatabase() {
 		try {
 			this.validator(this.login, this.password);
@@ -42,6 +50,10 @@ export default class User {
 		}
 	}
 
+	/**
+	 * Checks for user in db
+	 * @return {Promise<User> | Promise<undefined>}
+	 */
 	async searchUserInDB() {
 		try {
 			this.validator(this.login, this.password);
@@ -52,6 +64,11 @@ export default class User {
 		}
 	}
 
+	/**
+	 * Validates user input
+	 * @param login username of user
+	 * @param password password of user
+	 */
 	validator(login, password) {
 		if (!login) throw new Error('Login jest pusty');
 		if (login.length <= 3) throw new Error('Login musi być dłuższy niż 3 znaki');

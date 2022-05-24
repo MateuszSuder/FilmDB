@@ -1,5 +1,5 @@
 /**
- *
+ * Parses data to YYYY-MM-DD format
  * @param timestamp of date to parse
  * @returns {string} date in YYYY-MM-DD format
  */
