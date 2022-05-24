@@ -79,27 +79,38 @@
 						</div>
 					</div>
 				</div>
-				<div
-					class="login vertical-align"
-					id="login-button"
-					name="<%= user ? 'menu-button' : 'login-button' %>"
-				>
-					<%-
+				<div id='user-info-container'>
+					<div
+							class="login vertical-align"
+							id="login-button"
+							name="<%= user ? 'menu-button' : 'login-button' %>"
+					>
+						<%-
 						user ?
-							`<img
+								`<img
 								id="user-icon"
 								src="/public/assets/User-icon.svg"
 								alt="User"
 							/>`
-							:
-							`Login
+								:
+								`Login
 								<img
 									id="login-icon"
 									src="/public/assets/Login.svg"
 									alt="Login"
 								/>`
-					%>
-
+						%>
+						<% if(user) { %>
+							<div id='user-menu' class='d-none'>
+								<div class='user-menu-item' name='favorites'>Ulubione</div>
+								<% if(user.permission === 'admin') { %>
+									<div class='user-menu-item' name='add-movie'>Dodaj film</div>
+									<div class='user-menu-item' name='dashboard'>Zarządzaj użytkownikami</div>
+ 								<% } %>
+								<div class='user-menu-item' name='logout'>Wyloguj</div>
+							</div>
+ 						<% } %>
+					</div>
 				</div>
 			</div>
 		</header>

@@ -1,10 +1,10 @@
 <div id="login-container">
-    <form id="login-form" action="<%= translations.action %>" method="POST">
+    <form id="login-form" action="<%= translations.action %>" method="POST" autocomplete='on'>
         <span class="header-primary">
             <%= translations.title %>
         </span>
-        <input type="text" placeholder="Login*" name="login" />
-        <input type="password" placeholder="Hasło*" name="password" />
+        <input type="text" placeholder="Login*" name="login" autocomplete='username' required />
+        <input type="password" placeholder="Hasło*" name="password" autocomplete='current-password' required />
         <a href="<%= translations.href %>">
             <%= translations.hrefText %>
         </a>

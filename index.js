@@ -6,11 +6,13 @@ import home from './routes/home.js'
 import login from './routes/login.js'
 import register from './routes/register.js'
 import movie from './routes/movie.js'
+import logout from './routes/logout.js'
 
 const app = express()
 
 app.set('view engine', 'ejs')
 
+// Middlewares
 app.use(express.json()) // Used to parse JSON bodies
 app.use(cookieParser());
 app.use(session({
@@ -25,14 +27,18 @@ app.use(function(req, res, next) {
     next();
 });
 
+// Static content
 app.use('/public', express.static('public'))
 app.use('/src/js', express.static('src/js'))
 
+// Routes
 app.use('/', home)
 app.use('/login', login)
 app.use('/register', register)
+app.use('/logout', logout)
 app.use('/movie', movie)
 
+// Run server
 app.listen(process.env.PORT, () => {
     console.log(`Server running on port ${process.env.PORT}`)
 })

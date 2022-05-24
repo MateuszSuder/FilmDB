@@ -36,6 +36,7 @@ const init = () => {
 	});
 
 	buttonsHandlers();
+	menuHandler();
 };
 
 const buttonsHandlers = () => {
@@ -46,6 +47,9 @@ const buttonsHandlers = () => {
 				break;
 			case "login-button":
 				location.replace("/login");
+				break;
+			case "menu-button":
+				$('#user-menu').toggleClass('d-none');
 				break;
 			default:
 				location.replace("/");
@@ -63,6 +67,32 @@ const buttonsHandlers = () => {
 		event.stopPropagation();
 	});
 };
+
+function menuHandler() {
+	$('#user-menu > .user-menu-item').click(function() {
+		/**
+		 *
+		 * @type {'favorites' | 'add-movie' | 'dashboard' | 'logout'}
+		 */
+		const action = $(this).attr('name');
+		switch (action) {
+			case 'favorites':
+				location.replace('/favorites');
+				break;
+			case 'add-movie':
+				location.replace('/add-movie');
+				break;
+			case 'dashboard':
+				location.replace('/dashboard');
+				break;
+			case 'logout':
+				$.ajax({ url: '/logout', method: 'POST'})
+					.done(function() {
+						location.replace('/')
+					})
+		}
+	})
+}
 
 /**
  *

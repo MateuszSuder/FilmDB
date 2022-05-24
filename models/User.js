@@ -7,6 +7,10 @@ import bcrypt from 'bcrypt'
  */
 export default class User {
 	/**
+	 * @type number
+	 */
+	id
+	/**
 	 * @type string
 	 */
 	login;
@@ -52,7 +56,7 @@ export default class User {
 
 	/**
 	 * Checks for user in db
-	 * @return {Promise<User> | Promise<undefined>}
+	 * @return {Array.<User> | undefined}
 	 */
 	async searchUserInDB() {
 		try {

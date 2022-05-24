@@ -2,16 +2,20 @@ import User from '../models/User.js'
 import bcrypt from 'bcrypt'
 
 export const loginView = (req, res) => {
-  res.render("layout", {
-    page: "views/login",
-    translations: {
-      title: "Zaloguj się",
-      href: "/register",
-      hrefText: "Nie masz konta? Zarejestruj się.",
-      buttonText: "Zaloguj się",
-      action: "/login",
-    },
-  });
+  if(req.session.user) {
+    res.redirect('/');
+  } else {
+    res.render("layout", {
+      page: "views/login",
+      translations: {
+        title: "Zaloguj się",
+        href: "/register",
+        hrefText: "Nie masz konta? Zarejestruj się.",
+        buttonText: "Zaloguj się",
+        action: "/login",
+      },
+    });
+  }
 };
 
 export const loginUser = async (req, res) => {
@@ -20,7 +24,7 @@ export const loginUser = async (req, res) => {
   try {
     const u = new User(login, password);
     /**
-     * @type {Array<Object.<User>> | undefined}
+     * @type {Array<User> | undefined}
      */
     const result = await u.searchUserInDB();
 
@@ -57,5 +61,5 @@ const checkData = async (result, password) => {
   const validation = await bcrypt.compare(password, result[0].password);
 
   if(!validation) throw new Error(`Niepoprawne hasło`);
-  if(result[0].isBlocked) throw new Error(`Niepoprawne hasło`);
+  if(result[0].isBlocked) throw new Error(`Użytkownik zablokowany`);
 }

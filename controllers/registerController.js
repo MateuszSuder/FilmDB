@@ -1,16 +1,22 @@
 import User from '../models/User.js'
 
+const registerTranslation = {
+	title: 'Zarejestruj się',
+	href: '/login',
+	hrefText: 'Masz już konto? Zaloguj się.',
+	buttonText: 'Zarejestruj się',
+	action: '/register',
+}
+
 export const registerView = (req, res) => {
-	res.render('layout', {
-		page: 'views/login',
-		translations: {
-			title: 'Zarejestruj się',
-			href: '/login',
-			hrefText: 'Masz już konto? Zaloguj się.',
-			buttonText: 'Zarejestruj się',
-			action: '/register',
-		},
-	})
+	if(req.session.user) {
+		res.redirect('/');
+	} else {
+		res.render('layout', {
+			page: 'views/login',
+			translations: registerTranslation,
+		})
+	}
 }
 
 export const registerUser = async (req, res) => {
@@ -20,19 +26,11 @@ export const registerUser = async (req, res) => {
         const u = new User(login, password);
 		await u.saveUserToDatabase();
 
-		res.render('layout', {
-            page: 'views/home',
-        })
+		res.redirect('/login');
     } catch (e) {
         res.render('layout', {
             page: 'views/login',
-            translations: {
-                title: 'Zarejestruj się',
-                href: '/login',
-                hrefText: 'Masz już konto? Zaloguj się.',
-                buttonText: 'Zarejestruj się',
-                action: '/register',
-            },
+            translations: registerTranslation,
             errors: [e.message]
         })
     }
