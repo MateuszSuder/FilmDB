@@ -28,6 +28,6 @@
     gap: 1rem;
 }
 
-#dashboard-container > .user-row > .user-panel > img{
+#dashboard-container > .user-row > .user-panel > img {
     cursor: pointer;
 }

@@ -12,6 +12,7 @@
 		<link rel="stylesheet" href="/public/style/slider.css" />
 		<link rel="stylesheet" href="/public/style/login.css" />
 		<link rel="stylesheet" href="/public/style/dashboard.css" />
+		<link rel="stylesheet" href="/public/style/modal.css" />
 		<link
 			rel="stylesheet"
 			href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css"
@@ -120,6 +121,7 @@
 				<% const dir = process.cwd() + '/' %> <%- include(dir + page) %>
 			</div>
 		</main>
+		<%- include('modal') %>
 	</body>
 	<script
 		src="https://code.jquery.com/jquery-3.6.0.min.js"

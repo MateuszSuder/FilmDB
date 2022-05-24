@@ -1,0 +1,14 @@
+<div id='modal-mask'>
+    <div id='modal-container'>
+        <div id='modal-header'>
+            <%= typeof modal !== 'undefined' && modal.action %>
+        </div>
+        <div id='modal-body'>
+            <%= typeof modal !== 'undefined' && modal.text %>
+        </div>
+        <div id='modal-bottom'>
+            <input type='button' value='Nie'>
+            <input type='button' value='Tak' class="primary-button">
+        </div>
+    </div>
+</div>
