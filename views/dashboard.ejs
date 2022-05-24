@@ -1,0 +1,14 @@
+<div id='dashboard-container'>
+    <% users.forEach((user) => { %>
+        <div class='user-row <%= user.isBlocked && 'blocked' %>'>
+        <span class='username'>
+            <%= user.username %> <%= user.isBlocked ? '(zablokowany)' : '' %>
+        </span>
+            <div class='user-panel'>
+                <img src='public/assets/Modify-user.svg' alt='Zmień uprawnienia użytkownika' title='Zmień uprawnienia użytkownika'>
+                <img src='public/assets/Delete-user.svg' alt='Usuń użytkownika' title='Usuń użytkownika'>
+                <img src='public/assets/Block-user.svg' alt='Zablokuj użytkownika' title='Zablokuj użytkownika'>
+            </div>
+        </div>
+    <% }) %>
+</div>

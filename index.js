@@ -7,6 +7,7 @@ import login from './routes/login.js'
 import register from './routes/register.js'
 import movie from './routes/movie.js'
 import logout from './routes/logout.js'
+import dashboard from './routes/dashboard.js'
 
 const app = express()
 
@@ -37,6 +38,7 @@ app.use('/login', login)
 app.use('/register', register)
 app.use('/logout', logout)
 app.use('/movie', movie)
+app.use('/dashboard', dashboard)
 
 // Run server
 app.listen(process.env.PORT, () => {

@@ -158,6 +158,7 @@ header {
 	transform: translate(50%, 100%);
 	cursor: default;
 	display: grid;
+	min-width: 210px;
 }
 
 .user-menu-item {

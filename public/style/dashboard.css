@@ -1,0 +1,29 @@
+#dashboard-container {
+    width: 100%;
+
+    padding: 3rem;
+    font-size: 2rem;
+}
+
+#dashboard-container > .user-row {
+    background-color: white;
+    padding: 1rem 2rem;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    flex-direction: row;
+    align-items: center;
+
+    margin-bottom: 2rem;
+}
+
+#dashboard-container > .user-row.blocked {
+    color: red;
+}
+
+#dashboard-container > .user-row > .user-panel {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 1rem;
+}

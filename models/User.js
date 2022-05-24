@@ -1,6 +1,6 @@
 import db from '../src/database/database.js'
 import bcrypt from 'bcrypt'
-
+import { arrayToSqlList } from '../src/database/utils.js'
 
 /**
  * Model containing user data
@@ -32,6 +32,21 @@ export default class User {
 		this.validator(login, password);
 		this.login = login;
 		this.password = password;
+	}
+
+	/**
+	 * Gets all users from database
+	 * @param {Array<string>} omit id of users to omit
+	 * @param {Array<'user' | 'admin'>} permissions permissions to get
+	 * @return {Promise<User[]>}
+	 */
+	static async getAllUsers(omit, permissions) {
+		try {
+			// language=SQL
+			return await db.all(`SELECT id, username, permission, isBlocked FROM Users WHERE id NOT IN ${arrayToSqlList(omit)} AND permission IN ${arrayToSqlList(permissions)}`);
+		} catch (e) {
+			console.log(e)
+		}
 	}
 
 	/**
