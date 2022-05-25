@@ -1,188 +1,199 @@
-@import url("https://fonts.googleapis.com/css2?family=Anaheim&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Anaheim&display=swap');
 
 * {
-  margin: 0;
-  padding: 0;
-  line-height: 1em;
+	margin: 0;
+	padding: 0;
+	line-height: 1em;
 }
 
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 html {
-  font-size: 12px;
+	font-size: 12px;
 }
 
 body {
-  background-color: #e1e2e1;
-  font-family: "Anaheim", serif !important;
-  font-style: normal;
-  font-weight: 400;
+	background-color: #e1e2e1;
+	font-family: 'Anaheim', serif !important;
+	font-style: normal;
+	font-weight: 400;
 }
 
 :root {
-  --primary-color: #005662;
-  --gray-accent: #808080;
-  --primary-link: #9a98ff;
+	--primary-color: #005662;
+	--gray-accent: #808080;
+	--primary-link: #9a98ff;
 }
 
 a,
 a:focus,
 a:visited {
-  text-decoration: none;
-  color: var(--primary-link);
+	text-decoration: none;
+	color: var(--primary-link);
 }
-
-input[type="text"],
-input[type="password"] {
-  border: none;
+textarea,
+input[type='text'],
+input[type='password'],
+input[type='date'] {
+	border: none;
+	background: transparent;
 }
 
 input,
 select,
 textarea,
 button {
-  font-family: inherit;
+	font-family: inherit;
 }
-
+textarea:focus,
 input:focus,
 select:focus {
-  outline: none;
+	outline: none;
 }
 
 .no-select {
-  -webkit-touch-callout: none; /* iOS Safari */
-  -webkit-user-select: none; /* Safari */
-  -khtml-user-select: none; /* Konqueror HTML */
-  -moz-user-select: none; /* Old versions of Firefox */
-  -ms-user-select: none; /* Internet Explorer/Edge */
-  user-select: none;
+	-webkit-touch-callout: none; /* iOS Safari */
+	-webkit-user-select: none; /* Safari */
+	-khtml-user-select: none; /* Konqueror HTML */
+	-moz-user-select: none; /* Old versions of Firefox */
+	-ms-user-select: none; /* Internet Explorer/Edge */
+	user-select: none;
 }
 
-input[type="button"],
-input[type="submit"] {
-  border: none;
-  outline: none;
-  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 5px;
-  font-size: 1.66rem;
+input[type='button'],
+input[type='submit'] {
+	border: none;
+	outline: none;
+	box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+	border-radius: 5px;
+	font-size: 1.66rem;
 
-  padding: 11px 54px 11px 54px;
+	padding: 11px 54px 11px 54px;
 
-  cursor: pointer;
+	cursor: pointer;
 }
 
 .header-primary {
-  font-size: 2.5rem;
-  color: var(--primary-color);
+	font-size: 2.5rem;
+	color: var(--primary-color);
 }
 
 .d-none {
-  display: none !important;
+	display: none !important;
 }
 
-input[type="text"],
-input[type="password"],
-input[type="number"] {
-  border-radius: 2px;
-  border: 1px solid #80808050;
-  box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.1);
+textarea,
+input[type='text'],
+input[type='password'],
+input[type='number'],
+input[type='date'] {
+	border-radius: 2px;
+	border: 1px solid #80808050;
+	box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.1);
 
-  width: 40%;
-  height: 3rem;
+	width: 40%;
+	height: 3rem;
 
-  padding-left: 1rem;
+	padding-left: 1rem;
 }
 
-input[type="text"]::placeholder,
-input[type="password"]::placeholder,
-input[type="number"]::placeholder {
+textarea::placeholder,
+input[type='text']::placeholder,
+input[type='password']::placeholder,
+input[type='number']::placeholder {
+	padding-left: 0;
 }
 
-input[type="text"]::placeholder,
-input[type="password"]::placeholder,
-input[type="number"]::placeholder {
+textarea::placeholder {
+	height: 100%;
+	text-align: center;
 }
 
-input[type="text"]::placeholder,
-input[type="password"]::placeholder,
-input[type="number"]::placeholder {
-  padding-left: 0rem;
+textarea,
+input[type='text']::placeholder,
+input[type='password']::placeholder,
+input[type='number']::placeholder,
+input[type='date'] {
+	color: var(--gray-accent);
 }
-
 input::-webkit-textfield-decoration-container {
-  height: 100%;
+	height: 100%;
 }
 
 .primary-button {
-  background: var(--primary-color);
-  color: white;
+	background: var(--primary-color);
+	color: white;
 }
 
 .custom-select {
-  position: relative;
-  width: 100%;
+	position: relative;
+	width: 100%;
 }
 
 .custom-select::after {
-  content: "";
-  position: absolute;
-  bottom: 50%;
-  right: 5%;
-  width: 8px;
-  height: 8px;
-  transition: all 0.5s;
+	content: '';
+	position: absolute;
+	bottom: 50%;
+	right: 5%;
+	width: 8px;
+	height: 8px;
+	transition: all 0.5s;
 
-  border-bottom: solid 2px var(--primary-color);
-  border-right: solid 2px var(--primary-color);
+	border-bottom: solid 2px var(--primary-color);
+	border-right: solid 2px var(--primary-color);
 
-  transform: rotate(45deg) translateY(50%);
+	transform: rotate(45deg) translateY(50%);
 }
 
 .custom-select select {
-  -webkit-appearance: none;
-  padding: 12px 40px 12px 18px;
-  width: 100%;
-  border: 1px solid var(--gray-accent);
-  box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.1);
-  border-radius: 2px;
-  background: transparent;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: 1.5rem;
-  transition: all 150ms ease;
+	-webkit-appearance: none;
+	padding: 12px 40px 12px 18px;
+	width: 100%;
+	border: 1px solid var(--gray-accent);
+	box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.1);
+	border-radius: 2px;
+	background: transparent;
+	cursor: pointer;
+	font-family: inherit;
+	font-size: 1.5rem;
+	transition: all 150ms ease;
 }
 
 .key-value {
-  display: grid;
-  flex-direction: row;
-  grid-template-columns: minmax(100px, max-content) 1fr;
+	display: grid;
+	flex-direction: row;
+	grid-template-columns: minmax(100px, max-content) 1fr;
 
-  font-size: 1.2rem;
+	font-size: 1.2rem;
 }
 
 .key-value *:nth-child(2) {
-  color: black;
+	color: black;
 
-  font-size: 1.5rem;
+	font-size: 1.5rem;
 }
 
 .grid-item-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
 }
 
 .vertical-align {
-  display: flex;
-  align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 .error {
-  font-size: 1.5rem;
-  color: rgb(253, 40, 40);
+	font-size: 1.5rem;
+	color: rgb(253, 40, 40);
+}
+
+ul {
+	list-style-position: inside;
 }

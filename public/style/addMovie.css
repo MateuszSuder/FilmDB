@@ -1,0 +1,41 @@
+#add-movie-container {
+	margin: 0 3rem;
+}
+
+#add-movie-header {
+	text-align: center;
+	padding: 4rem;
+	font-size: 4rem;
+
+	color: var(--primary-color);
+}
+
+#add-movie-body {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+}
+
+#add-movie-body > #add-movie-description {
+	width: 80%;
+	height: 10rem;
+}
+
+#add-movie-body > #add-movie-actors {
+	width: 40%;
+	font-size: 1.5rem;
+	text-align: center;
+	margin-top: 2rem;
+}
+
+#add-movie-body > #add-movie-actors > #add-movie-actors-list {
+	text-align: left;
+}
+
+#add-movie-body > #add-movie-actors > #add-movie-actors-list > li:after {
+	content: 'usuń...';
+	font-size: 1rem;
+	color: red;
+	margin-left: 1rem;
+	cursor: pointer;
+}
