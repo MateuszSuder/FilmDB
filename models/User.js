@@ -1,6 +1,6 @@
-import db from '../src/database/database.js'
-import bcrypt from 'bcrypt'
-import { arrayToSqlList } from '../src/database/utils.js'
+import db from '../src/database/database.js';
+import bcrypt from 'bcrypt';
+import { arrayToSqlList } from '../src/database/utils.js';
 
 /**
  * Model containing user data
@@ -9,7 +9,7 @@ export default class User {
 	/**
 	 * @type number
 	 */
-	id
+	id;
 	/**
 	 * @type string
 	 */
@@ -27,7 +27,6 @@ export default class User {
 	 */
 	permission;
 
-
 	constructor(login, password) {
 		this.validator(login, password);
 		this.login = login;
@@ -43,9 +42,44 @@ export default class User {
 	static async getAllUsers(omit, permissions) {
 		try {
 			// language=SQL
-			return await db.all(`SELECT id, username, permission, isBlocked FROM Users WHERE id NOT IN ${arrayToSqlList(omit)} AND permission IN ${arrayToSqlList(permissions)}`);
+			return await db.all(
+				`SELECT id, username, permission, isBlocked FROM Users WHERE id NOT IN ${arrayToSqlList(
+					omit,
+				)} AND permission IN ${arrayToSqlList(permissions)}`,
+			);
 		} catch (e) {
-			console.log(e)
+			console.log(e);
+		}
+	}
+
+	static async modifyUserPermission(id, permission) {
+		try {
+			// language=SQL
+			return await db.run(
+				`UPDATE Users SET permission='${permission}' WHERE id='${id}'`,
+			);
+		} catch (e) {
+			console.log(e);
+		}
+	}
+
+	static async deleteUser(id) {
+		try {
+			// language=SQL
+			return await db.run(`DELETE FROM Users WHERE id='${id}'`);
+		} catch (e) {
+			console.log(e);
+		}
+	}
+
+	static async blockUser(id, blocked) {
+		try {
+			// language=SQL
+			return await db.run(
+				`UPDATE Users SET isBlocked='${blocked}' WHERE id='${id}'`,
+			);
+		} catch (e) {
+			console.log(e);
 		}
 	}
 
@@ -61,10 +95,15 @@ export default class User {
 			const salt = await bcrypt.genSalt(10);
 			// now we set user password to hashed password
 			const hashedPassword = await bcrypt.hash(this.password, salt);
-			const result = db.exec(`INSERT INTO Users (username, password, permission) VALUES ("${this.login}", "${hashedPassword}", "user")`);
+			const result = db.exec(
+				`INSERT INTO Users (username, password, permission) VALUES ("${this.login}", "${hashedPassword}", "user")`,
+			);
 			return await result;
 		} catch (e) {
-			if(e.errno === 19) throw new Error(`Użytkownik z nazwą ${this.login} już istnieje`);
+			if (e.errno === 19)
+				throw new Error(
+					`Użytkownik z nazwą ${this.login} już istnieje`,
+				);
 			throw e;
 		}
 	}
@@ -77,7 +116,9 @@ export default class User {
 		try {
 			this.validator(this.login, this.password);
 			// language=SQL
-			return await db.all(`SELECT * FROM Users where username='${this.login}'`);
+			return await db.all(
+				`SELECT * FROM Users where username='${this.login}'`,
+			);
 		} catch (e) {
 			throw e;
 		}
@@ -90,10 +131,14 @@ export default class User {
 	 */
 	validator(login, password) {
 		if (!login) throw new Error('Login jest pusty');
-		if (login.length <= 3) throw new Error('Login musi być dłuższy niż 3 znaki');
-		if (login.length > 12) throw new Error('Login nie może być dłuższy niż 12 znaków');
+		if (login.length <= 3)
+			throw new Error('Login musi być dłuższy niż 3 znaki');
+		if (login.length > 12)
+			throw new Error('Login nie może być dłuższy niż 12 znaków');
 		if (!password) throw new Error('Hasło jest puste');
-		if (password.length < 5) throw new Error('Hasło musi być dłuższe lub równe 5 znaków');
-		if (password.length > 18) throw new Error('Hasło nie może być dłuższe niż 18 znaków');
+		if (password.length < 5)
+			throw new Error('Hasło musi być dłuższe lub równe 5 znaków');
+		if (password.length > 18)
+			throw new Error('Hasło nie może być dłuższe niż 18 znaków');
 	}
 }

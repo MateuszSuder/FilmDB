@@ -1,32 +1,50 @@
 #modal-mask {
-    position: fixed;
-    inset: 0;
+	position: fixed;
+	inset: 0;
 
-    background: rgba(0, 0, 0, 0.6);
+	background: rgba(0, 0, 0, 0.6);
 
-    z-index: 10;
+	z-index: 10;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	text-align: center;
 }
 
 #modal-mask > #modal-container {
-    background: white;
+	background: white;
 
-    height: 40rem;
-    width: 80rem;
+	height: 40rem;
+	width: 80rem;
 
-    border-radius: 10px;
+	border-radius: 10px;
 
-    display: grid;
-    grid-template-rows: 1fr 2fr 1fr;
+	display: grid;
+	grid-template-rows: 1fr 2fr 1fr;
 
-    align-items: center;
+	align-items: center;
+}
+
+#modal-mask > #modal-container > #modal-header {
+	font-size: 3rem;
+
+	border-bottom: solid var(--gray-accent) 2px;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	height: 100%;
+}
+
+#modal-mask > #modal-container > #modal-body {
+	font-size: 2rem;
 }
 
 #modal-mask > #modal-container > #modal-bottom {
-    width: 100%;
-    display: flex;
-    justify-content: space-evenly;
+	width: 100%;
+	display: flex;
+	justify-content: space-evenly;
 }

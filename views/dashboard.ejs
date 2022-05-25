@@ -5,9 +5,22 @@
             <%= user.username %> <%= user.isBlocked ? '(zablokowany)' : '' %>
         </span>
             <div class='user-panel'>
-                <img src='public/assets/Modify-user.svg' alt='Zmień uprawnienia użytkownika' title='Zmień uprawnienia użytkownika'>
-                <img src='public/assets/Delete-user.svg' alt='Usuń użytkownika' title='Usuń użytkownika'>
-                <img src='public/assets/Block-user.svg' alt='Zablokuj użytkownika' title='Zablokuj użytkownika'>
+                <img src='public/assets/Modify-user.svg' data-action='modify' data-user-id='<%= user.id %>'
+                     data-user-username='<%= user.username %>'
+                     data-user-permission='<%= user.permission %>'
+                     data-user-blocked='<%= user.isBlocked %>'
+                     alt='Zmień uprawnienia użytkownika' title='Zmień uprawnienia użytkownika'
+                     class='user-action-button'>
+                <img src='public/assets/Delete-user.svg' data-action='delete' data-user-id='<%= user.id %>'
+                     data-user-username='<%= user.username %>'
+                     data-user-permission='<%= user.permission %>'
+                     data-user-blocked='<%= user.isBlocked %>'
+                     alt='Usuń użytkownika' title='Usuń użytkownika' class='user-action-button'>
+                <img src='public/assets/Block-user.svg' data-action='block' data-user-id='<%= user.id %>'
+                     data-user-username='<%= user.username %>'
+                     data-user-permission='<%= user.permission %>'
+                     data-user-blocked='<%= user.isBlocked %>'
+                     alt='Zablokuj użytkownika' title='Zablokuj użytkownika' class='user-action-button'>
             </div>
         </div>
     <% }) %>
