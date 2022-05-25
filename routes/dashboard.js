@@ -10,11 +10,11 @@ import {
 const router = express.Router();
 
 router.use(async (req, res, next) => {
-	if (!req.session.user?.permission) {
+	if (!req.session.user || req.session.user?.permission === 'user') {
 		if (req.method === 'GET') {
-			console.log('get', req.method);
+			return res.redirect('/');
 		} else {
-			console.log(req.method);
+			return res.status(401).json({ error: 'Unauthorized' });
 		}
 	}
 
