@@ -9,6 +9,7 @@ export const homeView = (req, res) => {
 				productionYear: '1999',
 				addDate: '30-04-2022',
 				director: 'Frank Darabont',
+				isFavorite: false,
 			},
 			{
 				title: 'Skazani na Shawshank',
@@ -17,6 +18,7 @@ export const homeView = (req, res) => {
 				productionYear: '1994',
 				addDate: '01-05-2022',
 				director: 'Frank Darabont',
+				isFavorite: true,
 			},
 			{
 				title: 'Forrest Gump',
@@ -25,6 +27,7 @@ export const homeView = (req, res) => {
 				productionYear: '1994',
 				addDate: '28-04-2022',
 				director: 'Robert Zemeckis',
+				isFavorite: false,
 			},
 		],
 	});

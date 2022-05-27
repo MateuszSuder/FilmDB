@@ -172,7 +172,6 @@ input::-webkit-textfield-decoration-container {
 	flex-direction: row;
 	grid-template-columns: minmax(100px, max-content) 1fr;
 
-	font-size: 1.2rem;
 	font-size: 1rem;
 	color: var(--gray-accent);
 }
@@ -207,6 +206,22 @@ input::-webkit-textfield-decoration-container {
 .small-print {
 	font-size: 1.35rem;
 	color: var(--gray-accent);
+}
+
+.favorite {
+	background-image: url('/public/assets/Not-favorite.svg');
+	background-size: contain;
+	background-repeat: no-repeat;
+	width: 21px;
+	height: 17px;
+	cursor: pointer;
+
+	transition: background-image 0.5s ease-in, transform 0.5s ease-in;
+}
+
+.favorite:hover {
+	background-image: url('/public/assets/Favorite.svg');
+	transform: scale(125%);
 }
 
 .mt-5 {
