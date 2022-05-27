@@ -4,6 +4,8 @@
 	margin: 0;
 	padding: 0;
 	line-height: 1em;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 *,
@@ -208,19 +210,25 @@ input::-webkit-textfield-decoration-container {
 	color: var(--gray-accent);
 }
 
-.favorite {
-	background-image: url('/public/assets/Not-favorite.svg');
+.fav {
 	background-size: contain;
 	background-repeat: no-repeat;
 	width: 21px;
 	height: 17px;
 	cursor: pointer;
 
-	transition: background-image 0.5s ease-in, transform 0.5s ease-in;
+	transition: background-image 0.25s ease-in, transform 0.25s ease-in;
 }
 
-.favorite:hover {
+.not-favorite {
+	background-image: url('/public/assets/Not-favorite.svg');
+}
+
+.favorite {
 	background-image: url('/public/assets/Favorite.svg');
+}
+
+.fav:hover {
 	transform: scale(125%);
 }
 

@@ -37,6 +37,14 @@ const init = () => {
 
 	buttonsHandlers();
 	menuHandler();
+	favoriteHandler();
+};
+
+const favoriteHandler = () => {
+	$('.fav').hover(function () {
+		console.log($(this));
+		$(this).toggleClass('favorite not-favorite');
+	});
 };
 
 const buttonsHandlers = () => {
