@@ -31,7 +31,7 @@
 }
 
 #add-movie-body > #add-movie-actors > #add-movie-actors-list,
-input {
+#add-movie-body > #add-movie-actors > input {
 	text-align: left;
 	align-self: flex-start;
 }
