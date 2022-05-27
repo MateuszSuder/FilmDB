@@ -29,11 +29,11 @@ const init = () => {
 			dateParser(addDateSlider.slider('values', 1)),
 	);
 
-	$.getJSON('/public/assets/movies-mocks.json', function (movies) {
-		for (const movie of movies) {
-			$('#movies-list').append(movieFactory(movie));
-		}
-	});
+	// $.getJSON('/public/assets/movies-mocks.json', function (movies) {
+	// 	for (const movie of movies) {
+	// 		$('#movies-list').append(movieFactory(movie));
+	// 	}
+	// });
 
 	buttonsHandlers();
 	menuHandler();
