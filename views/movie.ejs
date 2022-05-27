@@ -1,0 +1,41 @@
+<div id='movie-container'>
+    <div id='movie-header'>
+        <div class='header-primary' id='movie-title'><%= movie.title %></div>
+        <div class='small-print' id='movie-production-date'>Dodano: <%= movie.addDate %></div>
+    </div>
+    <div id='movie-description'>
+        <%= movie.description%>
+    </div>
+    <div class='key-value'>
+        <span>
+            Premiera
+        </span>
+        <span>
+            <%= movie.productionDate%>
+        </span>
+    </div>
+    <div class='key-value'>
+        <span>
+            Reżyser
+        </span>
+        <span>
+            <%= movie.director%>
+        </span>
+    </div>
+    <div class='key-value'>
+        <span>
+            Gatunek
+        </span>
+        <span>
+           <%= movie.genre%>
+        </span>
+    </div>
+    <div id='movie-actors'>
+        <span class='header-primary'>Aktorzy</span>
+        <ul id='movie-actors-list'>
+            <% movie.actors.forEach(actor => {%>
+                <li><%= actor %></li>
+            <% }) %>
+        </ul>
+    </div>
+</div>

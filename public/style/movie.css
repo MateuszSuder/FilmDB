@@ -1,0 +1,37 @@
+#movie-container {
+	margin: 0 3rem;
+	display: flex;
+	flex-direction: column;
+	gap: 4rem;
+}
+
+#movie-container > #movie-header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: flex-end;
+
+	padding: 4rem 0 0;
+}
+
+#movie-container > #movie-header > #movie-title {
+	font-size: 4rem;
+}
+
+#movie-container > #movie-description {
+	font-size: 1.65rem;
+	line-height: 2.1rem;
+}
+
+#movie-container > .key-value > * {
+	font-size: 2rem !important;
+}
+
+#movie-container > #movie-actors > #movie-actors-list {
+	font-size: 1.75rem;
+	margin-left: 0.5rem;
+}
+
+#movie-container > #movie-actors > #movie-actors-list > li {
+	margin: 0.5rem;
+}

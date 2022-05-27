@@ -275,13 +275,11 @@ label + input {
 	grid-template-columns: 1fr 1fr;
 	grid-template-rows: auto;
 	grid-template-areas:
-		"gatunek ."
-		"kraj-produkcji data-dodania"
-		"rok-produkcji rezyser";
+		'gatunek .'
+		'kraj-produkcji data-dodania'
+		'rok-produkcji rezyser';
 	gap: 1.5rem;
 	margin-top: 2rem;
-	font-size: 1rem;
-	color: var(--gray-accent);
 	grid-auto-flow: column;
 }
 

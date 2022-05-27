@@ -43,6 +43,7 @@ app.use('/logout', logout);
 app.use('/movie', movie);
 app.use('/dashboard', dashboard);
 app.use('/add-movie', addMovie);
+app.use('/*', home);
 
 // Run server
 app.listen(process.env.PORT, () => {

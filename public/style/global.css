@@ -29,6 +29,10 @@ body {
 	--primary-link: #9a98ff;
 }
 
+ul {
+	list-style-position: inside;
+}
+
 a,
 a:focus,
 a:visited {
@@ -169,6 +173,8 @@ input::-webkit-textfield-decoration-container {
 	grid-template-columns: minmax(100px, max-content) 1fr;
 
 	font-size: 1.2rem;
+	font-size: 1rem;
+	color: var(--gray-accent);
 }
 
 .key-value *:nth-child(2) {
@@ -194,12 +200,13 @@ input::-webkit-textfield-decoration-container {
 	color: rgb(253, 40, 40);
 }
 
-ul {
-	list-style-position: inside;
-}
-
 .align-self-center {
 	align-self: center;
+}
+
+.small-print {
+	font-size: 1.35rem;
+	color: var(--gray-accent);
 }
 
 .mt-5 {
