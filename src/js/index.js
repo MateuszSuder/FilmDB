@@ -37,17 +37,17 @@ const init = () => {
 
 const actorsHandler = () => {
 	$('#add-actor').click(function () {
-		const actor = $('#actor-input').val();
+		const actorInput = $('#actor-input');
+		const actor = actorInput.val();
 		$('#add-movie-actors-list').append(
-			`<input type='text' name='actorsList[]' value='${actor}' maxlength='24' />`,
+			`<div><input type='text' name='actorsList[]' value='${actor}' maxlength='24' minlength='3' required /><span class='actor-delete'>usuń...</span></div>`,
 		);
+		actorInput.val('');
 	});
 
-	$('#add-movie-actors-list')
-		.after()
-		.click(function () {
-			$(this).find('li').remove();
-		});
+	$('#add-movie-actors-list').on('click', '.actor-delete', function () {
+		$(this).parent().remove();
+	});
 };
 
 const favoriteHandler = () => {

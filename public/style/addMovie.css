@@ -44,8 +44,8 @@
 	width: 100%;
 }
 
-#add-movie-body > #add-movie-actors > #add-movie-actors-list > input {
-	width: 100%;
+#add-movie-body > #add-movie-actors > #add-movie-actors-list input {
+	width: 80%;
 	margin-bottom: 1rem;
 }
 
@@ -67,8 +67,7 @@
 	color: #058849;
 }
 
-#add-movie-body > #add-movie-actors > #add-movie-actors-list > li:after {
-	content: 'usuń...';
+.actor-delete {
 	font-size: 1rem;
 	color: red;
 	margin-left: 1rem;
