@@ -1,3 +1,5 @@
+import Movie from '../models/Movie.js';
+
 export const addMovieView = (req, res) => {
 	res.render('layout', { page: 'views/addMovie' });
 };
@@ -16,4 +18,14 @@ export const editMovieView = (req, res) => {
 			actors: ['Actor 1', 'Actor 2', 'Actor 3', 'Actor 4'],
 		},
 	});
+};
+
+export const movieFormHandler = async (req, res) => {
+	try {
+		await Movie.addMovie(req.body);
+		res.redirect('/add-movie');
+	} catch (e) {
+		console.error(e);
+		res.redirect('/');
+	}
 };

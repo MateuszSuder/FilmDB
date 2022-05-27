@@ -60,13 +60,14 @@ header {
 
 	border: 1px solid var(--gray-accent);
 	border-radius: 5px;
-	padding: 3rem;
-	padding-bottom: 5rem;
+	padding: 3rem 3rem 5rem;
 
 	cursor: default;
 
 	display: grid;
 	grid-template-columns: 3fr 1fr;
+
+	z-index: 2;
 }
 
 #search-modal > div:nth-child(1) {
@@ -106,6 +107,7 @@ header {
 	position: fixed;
 	inset: 0;
 	background-color: rgba(255, 255, 255, 0.95);
+	z-index: 1;
 }
 
 @supports (

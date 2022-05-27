@@ -232,6 +232,10 @@ input::-webkit-textfield-decoration-container {
 	transform: scale(125%);
 }
 
+.pointer {
+	cursor: pointer;
+}
+
 .mt-5 {
 	margin-top: 5rem;
 }

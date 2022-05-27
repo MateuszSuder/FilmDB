@@ -29,20 +29,29 @@ const init = () => {
 			dateParser(addDateSlider.slider('values', 1)),
 	);
 
-	// $.getJSON('/public/assets/movies-mocks.json', function (movies) {
-	// 	for (const movie of movies) {
-	// 		$('#movies-list').append(movieFactory(movie));
-	// 	}
-	// });
-
 	buttonsHandlers();
 	menuHandler();
 	favoriteHandler();
+	actorsHandler();
+};
+
+const actorsHandler = () => {
+	$('#add-actor').click(function () {
+		const actor = $('#actor-input').val();
+		$('#add-movie-actors-list').append(
+			`<input type='text' name='actorsList[]' value='${actor}' maxlength='24' />`,
+		);
+	});
+
+	$('#add-movie-actors-list')
+		.after()
+		.click(function () {
+			$(this).find('li').remove();
+		});
 };
 
 const favoriteHandler = () => {
 	$('.fav').hover(function () {
-		console.log($(this));
 		$(this).toggleClass('favorite not-favorite');
 	});
 };

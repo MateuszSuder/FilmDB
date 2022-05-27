@@ -2,20 +2,19 @@
     <div id='add-movie-header'>
         <%= typeof movie === 'undefined' ? 'Dodawanie' : 'Edycja' %> filmu
     </div>
-    <form id='add-movie-body'>
-        <input type='text' placeholder='Tytuł' />
-        <input type='text' placeholder='Reżyser' />
-        <input type='text' placeholder='Gatunek' />
-        <input type='text' placeholder='Kraj produkcji' />
-        <input type='date' placeholder='Data premiery (YYYY-MM-DD)' />
-        <textarea maxlength='2000' placeholder='Opis' id="add-movie-description"></textarea>
+    <form id='add-movie-body' method='post' action='/add-movie'>
+        <input type='text' name="title" placeholder='Tytuł' required />
+        <input type='text' name="director" placeholder='Reżyser' required />
+        <input type='text' name="genre" placeholder='Gatunek' required />
+        <input type='text' name="productionCountry" placeholder='Kraj produkcji' required />
+        <input type='date' name="productionDate" placeholder='Data premiery (YYYY-MM-DD)' required />
+        <textarea maxlength='2000' placeholder='Opis' name='description' id="add-movie-description" required></textarea>
         <div id='add-movie-actors'>
             <div class='mb-1'>Aktorzy</div>
-            <ul id='add-movie-actors-list'>
-                <li>Aktor 1111</li>
-                <li>Aktor 2</li>
-            </ul>
-            <div id='add-movie-add-actor-container'><input type='text' placeholder='Aktor' /><span>&plus;</span></div>
+            <div id='add-movie-actors-list' name='actorsList'>
+
+            </div>
+            <div id='add-movie-add-actor-container'><input type='text' placeholder='Aktor' id='actor-input' maxlength='24' /><span class='pointer' id='add-actor'>&plus;</span></div>
         </div>
 
         <input type='submit' class='primary-button align-self-center mt-5'>
