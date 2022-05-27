@@ -26,10 +26,32 @@
 	font-size: 1.5rem;
 	text-align: center;
 	margin-top: 2rem;
+	display: flex;
+	flex-direction: column;
 }
 
-#add-movie-body > #add-movie-actors > #add-movie-actors-list {
+#add-movie-body > #add-movie-actors > #add-movie-actors-list,
+input {
 	text-align: left;
+	align-self: flex-start;
+}
+
+#add-movie-add-actor-container {
+	display: grid;
+	grid-template-columns: 4fr 1fr;
+	align-items: center;
+}
+
+#add-movie-add-actor-container > * {
+	width: 100%;
+}
+
+#add-movie-add-actor-container > span {
+	font-size: 4rem;
+	line-height: 1rem;
+	text-align: left;
+	padding-left: 0.5rem;
+	color: #058849;
 }
 
 #add-movie-body > #add-movie-actors > #add-movie-actors-list > li:after {

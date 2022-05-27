@@ -2,7 +2,7 @@
     <div id='add-movie-header'>
         <%= typeof movie === 'undefined' ? 'Dodawanie' : 'Edycja' %> filmu
     </div>
-    <div id='add-movie-body'>
+    <form id='add-movie-body'>
         <input type='text' placeholder='Tytuł' />
         <input type='text' placeholder='Reżyser' />
         <input type='text' placeholder='Gatunek' />
@@ -10,12 +10,14 @@
         <input type='date' placeholder='Data premiery (YYYY-MM-DD)' />
         <textarea maxlength='2000' placeholder='Opis' id="add-movie-description"></textarea>
         <div id='add-movie-actors'>
-            <div>Aktorzy</div>
+            <div class='mb-1'>Aktorzy</div>
             <ul id='add-movie-actors-list'>
                 <li>Aktor 1111</li>
                 <li>Aktor 2</li>
             </ul>
+            <div id='add-movie-add-actor-container'><input type='text' placeholder='Aktor' /><span>&plus;</span></div>
         </div>
 
-    </div>
+        <input type='submit' class='primary-button align-self-center mt-5'>
+    </form>
 </div>
