@@ -271,6 +271,12 @@ label + input {
 
 .movie-title {
 	margin-top: 2vh;
+
+	cursor: pointer;
+}
+
+.movie-title:hover {
+	text-decoration: underline solid var(--primary-color) 1px;
 }
 
 .movie-description {

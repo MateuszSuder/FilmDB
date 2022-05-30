@@ -2,7 +2,7 @@
     <% if(user) { %>
         <div id="movie-favorite" class='fav <%= movie.isFavorite ? 'favorite' : 'not-favorite' %>'></div>
     <% } %>
-    <span class='header-primary movie-title'><%= movie.title %></span>
+    <span class='header-primary movie-title' data-movie-id="<%= movie.id %>"><%= movie.title %></span>
     <div class='movie-description'>
         <div class='key-value'>
             <span>

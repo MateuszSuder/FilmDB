@@ -33,10 +33,18 @@ const init = () => {
 	menuHandler();
 	favoriteHandler();
 	actorsHandler();
+	movieRedirectHandler();
+};
+
+const movieRedirectHandler = () => {
+	$('.movie-title').on('click', function () {
+		const id = $(this).data('movie-id');
+		location.replace(`/movie/${id}`);
+	});
 };
 
 const actorsHandler = () => {
-	$('#add-actor').click(function () {
+	$('#add-actor').on('click', function () {
 		const actorInput = $('#actor-input');
 		const actor = actorInput.val();
 		$('#add-movie-actors-list').append(
@@ -51,13 +59,13 @@ const actorsHandler = () => {
 };
 
 const favoriteHandler = () => {
-	$('.fav').hover(function () {
+	$('.fav').on('hover', function () {
 		$(this).toggleClass('favorite not-favorite');
 	});
 };
 
 const buttonsHandlers = () => {
-	$('#logo, #login-button').click(function () {
+	$('#logo, #login-button').on('hover', function () {
 		switch ($(this).attr('name')) {
 			case 'logo-button':
 				location.replace('/');
@@ -74,12 +82,12 @@ const buttonsHandlers = () => {
 		}
 	});
 
-	$('#search-container').click(function (event) {
+	$('#search-container').on('click', function (event) {
 		$('#search-modal-container').removeClass('d-none');
 		event.stopPropagation();
 	});
 
-	$('#search-mask, #exit').click(function (event) {
+	$('#search-mask, #exit').on('click', function (event) {
 		$('#search-modal-container').addClass('d-none');
 		event.stopPropagation();
 	});
@@ -88,7 +96,7 @@ const buttonsHandlers = () => {
 		$('#modal-mask').addClass('d-none');
 	};
 
-	$('.user-action-button').click(function () {
+	$('.user-action-button').on('click', function () {
 		const id = $(this).data('user-id');
 		const username = $(this).data('user-username');
 		const permission = $(this).data('user-permission');
@@ -165,7 +173,7 @@ const buttonsHandlers = () => {
 };
 
 function menuHandler() {
-	$('#user-menu > .user-menu-item').click(function () {
+	$('#user-menu > .user-menu-item').on('click', function () {
 		/**
 		 * @type {'favorites' | 'add-movie' | 'dashboard' | 'logout'}
 		 */
@@ -203,13 +211,13 @@ function openModalHandler(header, body, leftAction, rightAction) {
 	modal
 		.find('#modal-left-button')
 		.unbind()
-		.click(function () {
+		.on('click', function () {
 			leftAction();
 		});
 	modal
 		.find('#modal-right-button')
 		.unbind()
-		.click(function () {
+		.on('click', function () {
 			rightAction();
 		});
 }
