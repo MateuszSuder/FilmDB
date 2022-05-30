@@ -202,6 +202,9 @@ function menuHandler() {
 			case 'dashboard':
 				location.replace('/dashboard');
 				break;
+			case 'favorites':
+				location.replace('/favorites');
+				break;
 			case 'logout':
 				$.ajax({ url: '/logout', method: 'POST' }).done(function () {
 					location.replace('/');

@@ -4,8 +4,8 @@ import {
 	modifyUserPermission,
 	deleteUser,
 	blockUser,
-	toggleFavorite,
 } from '../controllers/dashboardController.js';
+import { toggleFavorite } from '../controllers/favoritesController.js';
 import auth from './utils/auth.js';
 
 // Create router

@@ -49,7 +49,7 @@ export default class Movie {
 			movies.forEach(
 				(movie) =>
 					(movie.isFavorite = favorites.some(
-						(favorite) => favorite.movieId === movie.id,
+						(favorite) => favorite.id === movie.id,
 					)),
 			);
 		}
@@ -167,7 +167,7 @@ export default class Movie {
 
 	static async getUserFavorites(userId) {
 		return await db.all(
-			`SELECT movieId from UsersFavoriteMovies WHERE userId=?`,
+			`SELECT m.* from Movies m left join UsersFavoriteMovies u ON m.id=u.movieId WHERE u.userId=?`,
 			[userId],
 		);
 	}

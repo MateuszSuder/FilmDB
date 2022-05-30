@@ -34,14 +34,3 @@ export const blockUser = async (req, res) => {
 	await User.blockUser(id, blocked);
 	res.status(200).end();
 };
-
-export const toggleFavorite = async (req, res) => {
-	try {
-		const { movieId } = req.body;
-		await Movie.toggleMovieFavorite(req.session.user.id, movieId);
-		res.status(200).end();
-	} catch (e) {
-		console.error(e);
-		res.status(400).end();
-	}
-};
