@@ -51,6 +51,7 @@ export default class Movie {
 			title,
 			description,
 			director,
+			genre,
 			productionDate,
 			productionCountry,
 		} = movieInput;
@@ -61,10 +62,17 @@ export default class Movie {
 
 		// language=SQL
 		const movie = await db.all(
-			`INSERT INTO Movies(title, description, director, productionDate, productionCountry) 
-				VALUES (?, ?, ?, ?, ?) 
+			`INSERT INTO Movies(title, genre, description, director, productionDate, productionCountry) 
+				VALUES (?, ?, ?, ?, ?, ?) 
 				RETURNING id`,
-			[title, description, director, productionDate, productionCountry],
+			[
+				title,
+				description,
+				genre,
+				director,
+				productionDate,
+				productionCountry,
+			],
 		);
 
 		const movieId = movie[0].id;

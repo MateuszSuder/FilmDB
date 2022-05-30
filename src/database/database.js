@@ -25,6 +25,7 @@ export default await (async () => {
 		`CREATE TABLE IF NOT EXISTS Movies (
             id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
             title TEXT NOT NULL,
+            genre TEXT NOT NULL,
             description TEXT,
             director TEXT NOT NULL,
             productionDate DATE NOT NULL,
