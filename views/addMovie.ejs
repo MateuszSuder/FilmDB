@@ -1,22 +1,88 @@
-<div id='add-movie-container'>
-    <div id='add-movie-header'>
-        <%= typeof movie === 'undefined' ? 'Dodawanie' : 'Edycja' %> filmu
-    </div>
-    <form id='add-movie-body' method='post' action='/add-movie'>
-        <input type='text' name="title" placeholder='Tytuł' required />
-        <input type='text' name="director" placeholder='Reżyser' required />
-        <input type='text' name="genre" placeholder='Gatunek' required />
-        <input type='text' name="productionCountry" placeholder='Kraj produkcji' required />
-        <input type='date' name="productionDate" placeholder='Data premiery (YYYY-MM-DD)' required />
-        <textarea maxlength='2000' placeholder='Opis' name='description' id="add-movie-description" required></textarea>
-        <div id='add-movie-actors'>
-            <div class='mb-1'>Aktorzy</div>
-            <div id='add-movie-actors-list' name='actorsList'>
+<div id="add-movie-container">
+	<div id="add-movie-header">
+		<%= typeof movie === 'undefined' ? 'Dodawanie' : 'Edycja' %> filmu
+	</div>
+	<form
+		id="add-movie-body"
+		method="POST"
+		action="<%= typeof movie === 'undefined' ? '/add-movie' : '/edit-movie' %>"
+	>
+		<% if(typeof movie !== 'undefined') { %>
+		<input type="hidden" name="id" value="<%= movie.id %>" />
+		<% } %>
 
-            </div>
-            <div id='add-movie-add-actor-container'><input type='text' placeholder='Aktor' id='actor-input' maxlength='24' /><span class='pointer' id='add-actor'>&plus;</span></div>
-        </div>
+		<input
+			type="text"
+			name="title"
+			placeholder="Tytuł"
+			required
+			value="<%= typeof movie === 'undefined' ? '' : movie.title %>"
+		/>
+		<input
+			type="text"
+			name="director"
+			placeholder="Reżyser"
+			required
+			value="<%= typeof movie === 'undefined' ? '' : movie.director %>"
+		/>
+		<input
+			type="text"
+			name="genre"
+			placeholder="Gatunek"
+			required
+			value="<%= typeof movie === 'undefined' ? '' : movie.genre %>"
+		/>
+		<input
+			type="text"
+			name="productionCountry"
+			placeholder="Kraj produkcji"
+			required
+			value="<%= typeof movie === 'undefined' ? '' : movie.productionCountry %>"
+		/>
+		<input
+			type="date"
+			name="productionDate"
+			placeholder="Data premiery (YYYY-MM-DD)"
+			required
+			value="<%= typeof movie === 'undefined' ? '' : movie.productionDate %>"
+		/>
+		<textarea
+			maxlength="2000"
+			placeholder="Opis"
+			name="description"
+			id="add-movie-description"
+			required
+		>
+<%= typeof movie === 'undefined' ? '' : movie.description %></textarea
+		>
+		<div id="add-movie-actors">
+			<div class="mb-1">Aktorzy</div>
+			<div id="add-movie-actors-list" name="actorsList">
+				<% if(typeof movie !== 'undefined' && movie.actors) { %> <%
+				movie.actors.forEach(function(actor) { %>
+				<div>
+					<input
+						type="text"
+						name="actorsList[]"
+						value="<%= actor.name %>"
+						maxlength="24"
+						minlength="3"
+						required
+						data-actor-id="<%= actor.id %>"
+					/><span class="actor-delete">usuń...</span>
+				</div>
+				<% }) %> <% }%>
+			</div>
+			<div id="add-movie-add-actor-container">
+				<input
+					type="text"
+					placeholder="Aktor"
+					id="actor-input"
+					maxlength="24"
+				/><span class="pointer" id="add-actor">&plus;</span>
+			</div>
+		</div>
 
-        <input type='submit' class='primary-button align-self-center mt-5'>
-    </form>
+		<input type="submit" class="primary-button align-self-center mt-5" />
+	</form>
 </div>

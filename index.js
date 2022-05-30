@@ -9,6 +9,7 @@ import movie from './routes/movie.js';
 import logout from './routes/logout.js';
 import dashboard from './routes/dashboard.js';
 import addMovie from './routes/addMovie.js';
+import editMovie from './routes/editMovie.js';
 import favorites from './routes/favorites.js';
 
 const app = express();
@@ -44,6 +45,7 @@ app.use('/logout', logout);
 app.use('/movie', movie);
 app.use('/dashboard', dashboard);
 app.use('/add-movie', addMovie);
+app.use('/edit-movie', editMovie);
 app.use('/favorites', favorites);
 app.use('/*', home);
 

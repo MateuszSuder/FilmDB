@@ -119,6 +119,10 @@ export default class Movie {
 
 		const movieId = movie[0].id;
 
+		await Movie.linkActorsToMovies(movieId, actorsList);
+	}
+
+	static async linkActorsToMovies(movieId, actorsList) {
 		const actorsId = [];
 
 		const actorQuery = `INSERT INTO Actors (name) VALUES (?) RETURNING id`;
@@ -140,9 +144,64 @@ export default class Movie {
 		await movieActorStatement.finalize();
 	}
 
+	/**
+	 * @typedef { object } idInput;
+	 * @property { string } id
+	 * Edits movie in DB
+	 * @param {idInput & MovieInput} movieInput
+	 */
+	static async editMovie(movieInput) {
+		const {
+			title,
+			genre,
+			description,
+			director,
+			productionDate,
+			productionCountry,
+			id,
+		} = movieInput;
+
+		let { actorsList } = movieInput;
+
+		actorsList = actorsList || [];
+
+		await db.run(
+			`UPDATE Movies SET 
+			title=?, genre=?, description=?, 
+			director=?, productionDate=?, productionCountry=? 
+			WHERE id=?`,
+			[
+				title,
+				genre,
+				description,
+				director,
+				productionDate,
+				productionCountry,
+				id,
+			],
+		);
+
+		await db.run(
+			`DELETE FROM Actors WHERE id in (SELECT actorId FROM MoviesActors where movieId=?)`,
+			[id],
+		);
+
+		await db.run(`DELETE FROM MoviesActors WHERE movieId=?`, [id]);
+
+		await Movie.linkActorsToMovies(id, actorsList);
+	}
+
+	static async deleteMovie(movieId) {
+		await db.run(`DELETE FROM Movies WHERE id=?`, [movieId]);
+		await db.run(`DELETE FROM UsersFavoriteMovies WHERE movieId=?`, [
+			movieId,
+		]);
+		await db.run(`DELETE FROM MoviesActors WHERE movieId=?`, [movieId]);
+	}
+
 	static async toggleMovieFavorite(userId, movieId) {
 		const isFavorite = await db.get(
-			`SELECT movieId from UsersFavoriteMovies where userId=? AND movieId=?`,
+			`SELECT movieId from UsersFavoriteMovies WHERE userId=? AND movieId=?`,
 			[userId, movieId],
 		);
 		if (isFavorite) {

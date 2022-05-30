@@ -2,7 +2,7 @@ import { dateParser } from './utils.js';
 import { slidersHandlers } from './slider.js';
 
 // Run when document is loaded
-$(document).ready(() => {
+$(function () {
 	slidersHandlers();
 	init();
 });
@@ -94,6 +94,10 @@ const buttonsHandlers = () => {
 				location.replace('/');
 				break;
 		}
+	});
+
+	$('#movie-modify').on('click', function () {
+		location.replace(`/add-movie/${$(this).data('movie-id')}`);
 	});
 
 	$('#search-container').on('click', function (event) {
