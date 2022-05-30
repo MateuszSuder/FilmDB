@@ -1,5 +1,6 @@
 import db from '../src/database/database.js';
 import { arrayToSqlList } from '../src/database/utils.js';
+import Actor from './Actor.js';
 
 /**
  * @typedef MovieInput
@@ -39,7 +40,28 @@ export default class Movie {
 	dateAdded;
 
 	static async getAllMovies() {
+		/**
+		 * @type { Array.<Movie> }
+		 */
 		return await db.all(`SELECT * FROM Movies`);
+	}
+
+	static async getMovie(movieId) {
+		/**
+		 * @type { Movie }
+		 */
+		const movie = await db.get(`SELECT * FROM Movies where id=?`, [
+			movieId,
+		]);
+
+		if (!movie) return null;
+
+		const actors = await Actor.getActorsFromMovie(movieId);
+
+		return {
+			...movie,
+			actors,
+		};
 	}
 
 	/**
