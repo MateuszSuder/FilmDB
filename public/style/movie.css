@@ -16,6 +16,7 @@
 
 #movie-container > #movie-header > #movie-title {
 	font-size: 4rem;
+	position: relative;
 }
 
 #movie-container > #movie-description {
@@ -34,4 +35,9 @@
 
 #movie-container > #movie-actors > #movie-actors-list > li {
 	margin: 0.5rem;
+}
+
+.movie-favorite.fav {
+	top: 0;
+	right: -2rem;
 }

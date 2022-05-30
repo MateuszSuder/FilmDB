@@ -59,13 +59,13 @@ const actorsHandler = () => {
 };
 
 const favoriteHandler = () => {
-	$('.fav').on('hover', function () {
+	$('.fav').hover(function () {
 		$(this).toggleClass('favorite not-favorite');
 	});
 };
 
 const buttonsHandlers = () => {
-	$('#logo, #login-button').on('hover', function () {
+	$('#logo, #login-button').on('click', function () {
 		switch ($(this).attr('name')) {
 			case 'logo-button':
 				location.replace('/');
@@ -210,67 +210,14 @@ function openModalHandler(header, body, leftAction, rightAction) {
 	modal.find('#modal-body').html(body);
 	modal
 		.find('#modal-left-button')
-		.unbind()
+		.off()
 		.on('click', function () {
 			leftAction();
 		});
 	modal
 		.find('#modal-right-button')
-		.unbind()
+		.off()
 		.on('click', function () {
 			rightAction();
 		});
 }
-
-/**
- *
- * @param {{title: string, genre: string, productionCountry: string, productionYear: string, addDate: string, director: string}} movie
- */
-const movieFactory = (movie) => {
-	return `
-        <div class='movie-info'>
-            <span class='header-primary movie-title'>${movie.title || ''}</span>
-            <div class='movie-description'>
-                <div class='key-value'>
-                    <span>
-                        gatunek
-                    </span>
-                    <span>
-                        ${movie.genre || ''}
-                    </span>
-                </div>
-                <div class='key-value'>
-                    <span>
-                        kraj produkcji
-                    </span>
-                    <span>
-                        ${movie.productionCountry || ''}
-                    </span>
-                </div>
-                <div class='key-value'>
-                    <span>
-                        rok produkcji
-                    </span>
-                    <span>
-                        ${movie.productionYear || ''}
-                    </span>
-                </div>
-                <div class='key-value'>
-                    <span>
-                        data dodania
-                    </span>
-                    <span>
-                        ${movie.addDate || ''}
-                    </span>
-                </div>
-                <div class='key-value'>
-                    <span>
-                        reżyser
-                    </span>
-                    <span>
-                        ${movie.director || ''}
-                    </span>
-                </div>
-            </div>
-        </div>`;
-};
