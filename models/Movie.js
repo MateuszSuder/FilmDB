@@ -14,6 +14,35 @@ import { arrayToSqlList } from '../src/database/utils.js';
 
 export default class Movie {
 	/**
+	 * @type { string }
+	 */
+	id;
+	/**
+	 * @type { string }
+	 */
+	description;
+	/**
+	 * @type { string }
+	 */
+	director;
+	/**
+	 * @type { date }
+	 */
+	productionDate;
+	/**
+	 * @type { string }
+	 */
+	productionCountry;
+	/**
+	 * @type { date }
+	 */
+	dateAdded;
+
+	static async getAllMovies() {
+		return await db.all(`SELECT * FROM Movies`);
+	}
+
+	/**
 	 * Adds movie to database
 	 * @param {MovieInput} movieInput
 	 */
@@ -49,7 +78,7 @@ export default class Movie {
 			actorsId.push((await actorStatement.run(actor)).lastID);
 		}
 
-		await (await actorStatement).finalize();
+		await actorStatement.finalize();
 
 		const movieActorQuery = `INSERT INTO MoviesActors (movieId, actorId) VALUES (?, ?)`;
 		const movieActorStatement = await db.prepare(movieActorQuery);
@@ -58,20 +87,6 @@ export default class Movie {
 			await movieActorStatement.run([movieId, actorId]);
 		}
 
-		await (await movieActorStatement).finalize();
+		await movieActorStatement.finalize();
 	}
-
-	// /**
-	//  * @param {Array<string>} actors
-	//  */
-	// static parseActors(actors) {
-	// 	// language=SQL
-	// 	return actors.map((actor) =>
-	// 		db.prepare(`INSERT INTO Actors(name) VALUES (?) RETURNING id`, [
-	// 			actor,
-	// 		]),
-	// 	);
-	// }
-
-	static async linkActorsToMovies() {}
 }
