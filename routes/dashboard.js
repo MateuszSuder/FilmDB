@@ -4,6 +4,7 @@ import {
 	modifyUserPermission,
 	deleteUser,
 	blockUser,
+	toggleFavorite,
 } from '../controllers/dashboardController.js';
 import auth from './utils/auth.js';
 
@@ -21,6 +22,7 @@ router.get('/', dashboardView);
 router.put('/permission', modifyUserPermission);
 router.delete('/delete', deleteUser);
 router.put('/block', blockUser);
+router.put('/favorite', toggleFavorite);
 
 // Export router
 export default router;

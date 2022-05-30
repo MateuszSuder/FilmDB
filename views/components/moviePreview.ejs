@@ -1,48 +1,28 @@
-<div class='movie-info'>
-    <% if(user) { %>
-        <div id="movie-favorite" class='fav <%= movie.isFavorite ? 'favorite' : 'not-favorite' %>'></div>
-    <% } %>
-    <span class='header-primary movie-title' data-movie-id="<%= movie.id %>"><%= movie.title %></span>
-    <div class='movie-description'>
-        <div class='key-value'>
-            <span>
-                gatunek
-            </span>
-            <span>
-                <%= movie.genre %>
-            </span>
-        </div>
-        <div class='key-value'>
-            <span>
-                kraj produkcji
-            </span>
-            <span>
-                <%= movie.productionCountry %>
-            </span>
-        </div>
-        <div class='key-value'>
-            <span>
-                rok produkcji
-            </span>
-            <span>
-                <%= movie.productionDate %>
-            </span>
-        </div>
-        <div class='key-value'>
-            <span>
-                data dodania
-            </span>
-            <span>
-                <%= movie.dateAdded %>
-            </span>
-        </div>
-        <div class='key-value'>
-            <span>
-                reżyser
-            </span>
-            <span>
-                <%= movie.director %>
-            </span>
-        </div>
-    </div>
+<div class="movie-info">
+	<%- include('favorite') %>
+	<span class="header-primary movie-title" data-movie-id="<%= movie.id %>"
+		><%= movie.title %></span
+	>
+	<div class="movie-description">
+		<div class="key-value">
+			<span> gatunek </span>
+			<span> <%= movie.genre %> </span>
+		</div>
+		<div class="key-value">
+			<span> kraj produkcji </span>
+			<span> <%= movie.productionCountry %> </span>
+		</div>
+		<div class="key-value">
+			<span> rok produkcji </span>
+			<span> <%= movie.productionDate %> </span>
+		</div>
+		<div class="key-value">
+			<span> data dodania </span>
+			<span> <%= movie.dateAdded %> </span>
+		</div>
+		<div class="key-value">
+			<span> reżyser </span>
+			<span> <%= movie.director %> </span>
+		</div>
+	</div>
 </div>

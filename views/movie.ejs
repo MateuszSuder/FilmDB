@@ -1,11 +1,9 @@
 <div id="movie-container">
+	<img src="/public/assets/Repair Tool.png" id="movie-modify" />
 	<div id="movie-header">
 		<div class="header-primary" id="movie-title">
-            <% if(user) { %>
-                <div class='movie-favorite fav <%= movie.isFavorite ? 'favorite' : 'not-favorite' %>'></div>
-            <% } %>
-            <%= movie.title %>
-        </div>
+			<%- include('components/favorite') %> <%= movie.title %>
+		</div>
 		<div class="small-print" id="movie-production-date">
 			Dodano: <%= movie.dateAdded %>
 		</div>

@@ -2,7 +2,9 @@ import Movie from '../models/Movie.js';
 
 export const movieView = async (req, res) => {
 	try {
-		const movie = await Movie.getMovie(req.params.id);
+		let userId = req.session.user?.id;
+		const movie = await Movie.getMovie(req.params.id, userId);
+
 		if (movie) {
 			res.render('layout', {
 				page: 'views/movie',

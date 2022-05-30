@@ -39,14 +39,25 @@ export default class Movie {
 	 */
 	dateAdded;
 
-	static async getAllMovies() {
+	static async getAllMovies(userId = undefined) {
 		/**
 		 * @type { Array.<Movie> }
 		 */
-		return await db.all(`SELECT * FROM Movies`);
+		const movies = await db.all(`SELECT * FROM Movies`);
+		if (userId) {
+			const favorites = await Movie.getUserFavorites(userId);
+			movies.forEach(
+				(movie) =>
+					(movie.isFavorite = favorites.some(
+						(favorite) => favorite.movieId === movie.id,
+					)),
+			);
+		}
+
+		return movies;
 	}
 
-	static async getMovie(movieId) {
+	static async getMovie(movieId, userId = undefined) {
 		/**
 		 * @type { Movie }
 		 */
@@ -58,9 +69,18 @@ export default class Movie {
 
 		const actors = await Actor.getActorsFromMovie(movieId);
 
+		let isFavorite = false;
+
+		if (userId) {
+			isFavorite = Boolean(
+				await Movie.isUsersFavorite(userId, parseInt(movieId)),
+			);
+		}
+
 		return {
 			...movie,
 			actors,
+			isFavorite,
 		};
 	}
 
@@ -118,5 +138,37 @@ export default class Movie {
 		}
 
 		await movieActorStatement.finalize();
+	}
+
+	static async toggleMovieFavorite(userId, movieId) {
+		const isFavorite = await db.get(
+			`SELECT movieId from UsersFavoriteMovies where userId=? AND movieId=?`,
+			[userId, movieId],
+		);
+		if (isFavorite) {
+			return await db.run(
+				`DELETE FROM UsersFavoriteMovies WHERE userId=? AND movieId=?`,
+				[userId, movieId],
+			);
+		} else {
+			return await db.run(
+				`INSERT INTO UsersFavoriteMovies (userId, movieId) VALUES (?, ?)`,
+				[userId, movieId],
+			);
+		}
+	}
+
+	static async isUsersFavorite(userId, movieId) {
+		return await db.get(
+			`SELECT movieId from UsersFavoriteMovies WHERE userId=? AND movieId=?`,
+			[userId, movieId],
+		);
+	}
+
+	static async getUserFavorites(userId) {
+		return await db.all(
+			`SELECT movieId from UsersFavoriteMovies WHERE userId=?`,
+			[userId],
+		);
 	}
 }

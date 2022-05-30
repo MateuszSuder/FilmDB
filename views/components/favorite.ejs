@@ -1,0 +1,3 @@
+<% if(user) { %>
+    <div class='movie-favorite fav <%= movie.isFavorite ? 'favorite' : 'not-favorite' %>' data-movie-id='<%=movie.id %>'></div>
+<% } %>

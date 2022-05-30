@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/MateuszSuder/FilmDB#readme",
   "dependencies": {
+    "@types/express": "^4.17.13",
     "@types/jquery": "^3.5.14",
     "bcrypt": "^5.0.1",
     "cookie-parser": "^1.4.6",

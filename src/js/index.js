@@ -59,9 +59,23 @@ const actorsHandler = () => {
 };
 
 const favoriteHandler = () => {
-	$('.fav').hover(function () {
-		$(this).toggleClass('favorite not-favorite');
-	});
+	$('.fav')
+		.hover(function () {
+			$(this).toggleClass('favorite not-favorite');
+		})
+		.on('click', function () {
+			const movieId = $(this).data('movie-id');
+			$.ajax({
+				url: '/dashboard/favorite',
+				method: 'PUT',
+				contentType: 'application/json',
+				data: JSON.stringify({
+					movieId,
+				}),
+			}).done((d) => {
+				$(this).toggleClass('favorite not-favorite');
+			});
+		});
 };
 
 const buttonsHandlers = () => {

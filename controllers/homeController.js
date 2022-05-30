@@ -31,7 +31,7 @@ const mockMovies = [
 ];
 
 export const homeView = async (req, res) => {
-	const movies = await Movie.getAllMovies();
+	const movies = await Movie.getAllMovies(req.session.user?.id);
 
 	res.render('layout', {
 		page: 'views/home',
