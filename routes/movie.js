@@ -3,6 +3,13 @@ import { deleteMovie, movieView } from '../controllers/movieController.js';
 
 const router = express.Router();
 
+router.use(async (req, res, next) => {
+	if (req.method === 'DELETE') {
+		return auth(req, res, next);
+	}
+	next();
+});
+
 router.get('/:id', movieView);
 router.delete('/:id', deleteMovie);
 
