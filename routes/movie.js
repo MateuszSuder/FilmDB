@@ -1,5 +1,6 @@
 import express from 'express';
 import { deleteMovie, movieView } from '../controllers/movieController.js';
+import auth from './utils/auth.js';
 
 const router = express.Router();
 

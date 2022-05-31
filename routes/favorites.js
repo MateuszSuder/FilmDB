@@ -1,5 +1,6 @@
 import express from 'express';
 import { favoritesView } from '../controllers/favoritesController.js';
+import auth from './utils/auth.js';
 
 // Create router
 const router = express.Router();
