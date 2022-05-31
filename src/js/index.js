@@ -39,7 +39,7 @@ const init = () => {
 const movieRedirectHandler = () => {
 	$('.movie-title').on('click', function () {
 		const id = $(this).data('movie-id');
-		location.replace(`/movie/${id}`);
+		location.assign(`/movie/${id}`);
 	});
 };
 
@@ -82,22 +82,22 @@ const buttonsHandlers = () => {
 	$('#logo, #login-button').on('click', function () {
 		switch ($(this).attr('name')) {
 			case 'logo-button':
-				location.replace('/');
+				location.assign('/');
 				break;
 			case 'login-button':
-				location.replace('/login');
+				location.assign('/login');
 				break;
 			case 'menu-button':
 				$('#user-menu').toggleClass('d-none');
 				break;
 			default:
-				location.replace('/');
+				location.assign('/');
 				break;
 		}
 	});
 
 	$('#movie-modify').on('click', function () {
-		location.replace(`/add-movie/${$(this).data('movie-id')}`);
+		location.assign(`/add-movie/${$(this).data('movie-id')}`);
 	});
 
 	$('#search-container').on('click', function (event) {
@@ -198,20 +198,20 @@ function menuHandler() {
 		const action = $(this).attr('name');
 		switch (action) {
 			case 'favorites':
-				location.replace('/favorites');
+				location.assign('/favorites');
 				break;
 			case 'add-movie':
-				location.replace('/add-movie');
+				location.assign('/add-movie');
 				break;
 			case 'dashboard':
-				location.replace('/dashboard');
+				location.assign('/dashboard');
 				break;
 			case 'favorites':
-				location.replace('/favorites');
+				location.assign('/favorites');
 				break;
 			case 'logout':
 				$.ajax({ url: '/logout', method: 'POST' }).done(function () {
-					location.replace('/');
+					location.assign('/');
 				});
 		}
 	});
