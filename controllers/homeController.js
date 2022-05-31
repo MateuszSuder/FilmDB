@@ -67,7 +67,7 @@ const searchSingleValueWithComparision = (searchInput, key, stringA) => {
  * @param {Date} date date to compare to
  * @param {SearchInput} searchInput
  */
-const dateComparision = (date, searchInput) => {
+const productionYearComparision = (date, searchInput) => {
 	const dateProducted = new Date(date);
 
 	if (searchInput.productionYearStart) {
@@ -91,8 +91,29 @@ const dateComparision = (date, searchInput) => {
 
 /**
  *
+ * @param {Date} date date to compare to
+ * @param {FilterInput} searchInput
+ */
+const addDateComparision = (date, searchInput) => {
+	const dateAdded = new Date(date);
+
+	if (searchInput.dateAddedStart) {
+		if (dateAdded.getTime() < parseInt(searchInput.dateAddedStart))
+			return false;
+	}
+
+	if (searchInput.dateAddedEnd) {
+		if (dateAdded.getTime() > parseInt(searchInput.dateAddedEnd))
+			return false;
+	}
+
+	return true;
+};
+
+/**
+ *
  * @param {Array.<Movie>} movies
- * @param {SearchInput} searchInput
+ * @param {SearchInput & Filter} searchInput
  */
 const searchMovies = (movies, searchInput) => {
 	return movies.filter(
@@ -114,10 +135,11 @@ const searchMovies = (movies, searchInput) => {
 					actor.name,
 				),
 			) &&
-			dateComparision(movie.productionDate, searchInput) &&
+			productionYearComparision(movie.productionDate, searchInput) &&
 			(searchInput.genre ? movie.genre === searchInput.genre : true) &&
 			(searchInput.productionCountry
 				? movie.productionCountry === searchInput.productionCountry
-				: true),
+				: true) &&
+			addDateComparision(movie.dateAdded, searchInput),
 	);
 };
