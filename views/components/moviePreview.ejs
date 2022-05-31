@@ -1,7 +1,10 @@
 <div class="movie-info">
 	<%- include('favorite') %>
-	<span class="header-primary movie-title" data-movie-id="<%= movie.id %>"
-		><%= movie.title %></span
+	<a
+		class="header-primary movie-title"
+		data-movie-id="<%= movie.id %>"
+		href="/movie/<%= movie.id %>"
+		><%= movie.title %></a
 	>
 	<div class="movie-description">
 		<div class="key-value">
@@ -14,7 +17,7 @@
 		</div>
 		<div class="key-value">
 			<span> rok produkcji </span>
-			<span> <%= movie.productionDate %> </span>
+			<span> <%= new Date(movie.productionDate).getFullYear() %> </span>
 		</div>
 		<div class="key-value">
 			<span> data dodania </span>

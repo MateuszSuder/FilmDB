@@ -21,6 +21,10 @@ export default class Movie {
 	/**
 	 * @type { string }
 	 */
+	title;
+	/**
+	 * @type { string }
+	 */
 	description;
 	/**
 	 * @type { string }
@@ -38,12 +42,23 @@ export default class Movie {
 	 * @type { date }
 	 */
 	dateAdded;
+	/**
+	 * @type { Array }
+	 */
+	actors;
 
-	static async getAllMovies(userId = undefined) {
+	static async getMovies({ userId, actors }) {
 		/**
 		 * @type { Array.<Movie> }
 		 */
 		const movies = await db.all(`SELECT * FROM Movies`);
+
+		if (actors) {
+			for (const movie of movies) {
+				movie.actors = await Actor.getActorsFromMovie(movie.id);
+			}
+		}
+
 		if (userId) {
 			const favorites = await Movie.getUserFavorites(userId);
 			movies.forEach(

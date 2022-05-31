@@ -33,14 +33,6 @@ const init = () => {
 	menuHandler();
 	favoriteHandler();
 	actorsHandler();
-	movieRedirectHandler();
-};
-
-const movieRedirectHandler = () => {
-	$('.movie-title').on('click', function () {
-		const id = $(this).data('movie-id');
-		location.assign(`/movie/${id}`);
-	});
 };
 
 const actorsHandler = () => {
@@ -81,9 +73,6 @@ const favoriteHandler = () => {
 const buttonsHandlers = () => {
 	$('#logo, #login-button').on('click', function () {
 		switch ($(this).attr('name')) {
-			case 'logo-button':
-				location.assign('/');
-				break;
 			case 'login-button':
 				location.assign('/login');
 				break;
