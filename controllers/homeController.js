@@ -19,36 +19,6 @@ import Movie from '../models/Movie.js';
  * @property {string | undefined} dateAddedEnd - maximum date of adding to db
  */
 
-const mockMovies = [
-	{
-		title: 'Zielona mila',
-		genre: 'Dramat',
-		productionCountry: 'USA',
-		productionYear: '1999',
-		addDate: '30-04-2022',
-		director: 'Frank Darabont',
-		isFavorite: false,
-	},
-	{
-		title: 'Skazani na Shawshank',
-		genre: 'Dramat',
-		productionCountry: 'USA',
-		productionYear: '1994',
-		addDate: '01-05-2022',
-		director: 'Frank Darabont',
-		isFavorite: true,
-	},
-	{
-		title: 'Forrest Gump',
-		genre: 'Dramat',
-		productionCountry: 'USA',
-		productionYear: '1994',
-		addDate: '28-04-2022',
-		director: 'Robert Zemeckis',
-		isFavorite: false,
-	},
-];
-
 export const homeView = async (req, res) => {
 	let movies = await Movie.getMovies({
 		userId: req.session.user?.id,
@@ -84,19 +54,25 @@ const searchSingleValueWithComparision = (searchInput, key, stringA) => {
  * @param {SearchInput} searchInput
  */
 const dateComparision = (date, searchInput) => {
-	let result = true;
 	const dateProducted = new Date(date);
 
-	if (searchInput.productionYearStart)
-		result =
+	if (
+		!(
+			searchInput.productionYearStart &&
 			dateProducted.getFullYear() >=
-			parseInt(searchInput.productionYearStart);
-	if (searchInput.productionYearEnd)
-		result =
+				parseInt(searchInput.productionYearStart)
+		)
+	)
+		return false;
+	if (
+		!(
 			dateProducted.getFullYear() <=
-			parseInt(searchInput.productionYearEnd);
+			parseInt(searchInput.productionYearEnd)
+		)
+	)
+		return false;
 
-	return result;
+	return true;
 };
 
 /**
@@ -124,6 +100,10 @@ const searchMovies = (movies, searchInput) => {
 					actor.name,
 				),
 			) &&
-			dateComparision(movie.productionDate, searchInput),
+			dateComparision(movie.productionDate, searchInput) &&
+			(searchInput.genre ? movie.genre === searchInput.genre : true) &&
+			(searchInput.productionCountry
+				? movie.productionCountry === searchInput.productionCountry
+				: true),
 	);
 };

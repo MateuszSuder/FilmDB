@@ -33,6 +33,24 @@ const init = () => {
 	menuHandler();
 	favoriteHandler();
 	actorsHandler();
+	filterHandler();
+};
+
+const filterHandler = () => {
+	$('#filter').on('click', function () {
+		const production = $('#production-year-slider').slider('values');
+		const addDate = $('#add-date-slider').slider('values');
+		const params = new URLSearchParams();
+		console.log(production);
+		params.append('productionYearStart', production[0]);
+		params.append('productionYearEnd', production[1]);
+		params.append('dateAddedStart', addDate[0]);
+		params.append('dateAddedEnd', addDate[1]);
+		params.append('genre', $('#film-genre').val());
+		params.append('productionCountry', $('#country-production').val());
+
+		location.assign(`/?${params.toString()}`);
+	});
 };
 
 const actorsHandler = () => {

@@ -47,7 +47,6 @@ app.use('/dashboard', dashboard);
 app.use('/add-movie', addMovie);
 app.use('/edit-movie', editMovie);
 app.use('/favorites', favorites);
-app.use('/*', home);
 
 // Run server
 app.listen(process.env.PORT, () => {

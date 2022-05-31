@@ -1,5 +1,5 @@
 <div class="filter-container">
-    <div class="filters">
+    <form class="filters" name="filters">
         <div class="release-year border grid-item-center">
             <p>
                 <div>Rok premiery: <span id="production-year"></span></div>
@@ -39,7 +39,7 @@
             <input type="button" value="Reset" id="reset">
             <input type="button" value="Filtruj" id="filter" class="primary-button">
         </div>
-    </div>
+    </form>
 </div>
 <div class="movies-list">
     <% movies.forEach(movie => {%>
