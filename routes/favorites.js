@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.use(async (req, res, next) => {
 	console.log(req.method);
-	if (req.method === 'GET') {
+	if (req.method === 'GET' && !req.session.user) {
 		return auth(req, res, next);
 	}
 	next();
