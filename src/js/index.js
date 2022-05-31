@@ -102,7 +102,7 @@ const favoriteHandler = () => {
 		.on('click', function () {
 			const movieId = $(this).data('movie-id');
 			$.ajax({
-				url: '/dashboard/favorite',
+				url: '/favorites',
 				method: 'PUT',
 				contentType: 'application/json',
 				data: JSON.stringify({
