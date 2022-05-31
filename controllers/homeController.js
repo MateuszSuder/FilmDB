@@ -128,13 +128,15 @@ const searchMovies = (movies, searchInput) => {
 				'director',
 				movie.director,
 			) &&
-			movie.actors.some((actor) =>
-				searchSingleValueWithComparision(
-					searchInput,
-					'actor',
-					actor.name,
-				),
-			) &&
+			(searchInput.actor
+				? movie.actors.some((actor) =>
+						searchSingleValueWithComparision(
+							searchInput,
+							'actor',
+							actor.name,
+						),
+				  )
+				: true) &&
 			productionYearComparision(movie.productionDate, searchInput) &&
 			(searchInput.genre ? movie.genre === searchInput.genre : true) &&
 			(searchInput.productionCountry

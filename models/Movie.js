@@ -196,16 +196,14 @@ export default class Movie {
 			],
 		);
 
-		if (actorsList && actorsList.length) {
-			await db.run(
-				`DELETE FROM Actors WHERE id in (SELECT actorId FROM MoviesActors where movieId=?)`,
-				[id],
-			);
+		await db.run(
+			`DELETE FROM Actors WHERE id in (SELECT actorId FROM MoviesActors where movieId=?)`,
+			[id],
+		);
 
-			await db.run(`DELETE FROM MoviesActors WHERE movieId=?`, [id]);
+		await db.run(`DELETE FROM MoviesActors WHERE movieId=?`, [id]);
 
-			await Movie.linkActorsToMovies(id, actorsList);
-		}
+		await Movie.linkActorsToMovies(id, actorsList);
 	}
 
 	static async deleteMovie(movieId) {
