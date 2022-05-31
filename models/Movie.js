@@ -124,8 +124,8 @@ export default class Movie {
 				RETURNING id`,
 			[
 				title,
-				description,
 				genre,
+				description,
 				director,
 				productionDate,
 				productionCountry,
@@ -244,5 +244,13 @@ export default class Movie {
 			`SELECT m.* from Movies m left join UsersFavoriteMovies u ON m.id=u.movieId WHERE u.userId=?`,
 			[userId],
 		);
+	}
+
+	static async getAllGenres() {
+		return await db.all(`SELECT DISTINCT genre from Movies`);
+	}
+
+	static async getAllProductionCountries() {
+		return await db.all(`SELECT DISTINCT productionCountry from Movies`);
 	}
 }

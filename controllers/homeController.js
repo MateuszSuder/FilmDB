@@ -25,11 +25,25 @@ export const homeView = async (req, res) => {
 		actors: true,
 	});
 
+	let genres = await Movie.getAllGenres();
+	genres = genres.reduce((prev, curr, i) => {
+		prev.push(curr.genre);
+		return prev;
+	}, []);
+
+	let productionCountries = await Movie.getAllProductionCountries();
+	productionCountries = productionCountries.reduce((prev, curr, i) => {
+		prev.push(curr.productionCountry);
+		return prev;
+	}, []);
+
 	movies = searchMovies(movies, { ...req.query });
 
 	res.render('layout', {
 		page: 'views/home',
 		movies,
+		genres,
+		productionCountries,
 	});
 };
 
@@ -56,21 +70,21 @@ const searchSingleValueWithComparision = (searchInput, key, stringA) => {
 const dateComparision = (date, searchInput) => {
 	const dateProducted = new Date(date);
 
-	if (
-		!(
-			searchInput.productionYearStart &&
-			dateProducted.getFullYear() >=
-				parseInt(searchInput.productionYearStart)
+	if (searchInput.productionYearStart) {
+		if (
+			dateProducted.getFullYear() <
+			parseInt(searchInput.productionYearStart)
 		)
-	)
-		return false;
-	if (
-		!(
-			dateProducted.getFullYear() <=
+			return false;
+	}
+
+	if (searchInput.productionYearStart) {
+		if (
+			dateProducted.getFullYear() >
 			parseInt(searchInput.productionYearEnd)
 		)
-	)
-		return false;
+			return false;
+	}
 
 	return true;
 };

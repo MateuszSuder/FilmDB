@@ -236,6 +236,10 @@ input::-webkit-textfield-decoration-container {
 	cursor: pointer;
 }
 
+.capitalize {
+	text-transform: capitalize;
+}
+
 .mt-5 {
 	margin-top: 5rem;
 }

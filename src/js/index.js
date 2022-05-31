@@ -41,7 +41,6 @@ const filterHandler = () => {
 		const production = $('#production-year-slider').slider('values');
 		const addDate = $('#add-date-slider').slider('values');
 		const params = new URLSearchParams();
-		console.log(production);
 		params.append('productionYearStart', production[0]);
 		params.append('productionYearEnd', production[1]);
 		params.append('dateAddedStart', addDate[0]);

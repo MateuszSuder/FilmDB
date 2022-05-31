@@ -17,26 +17,22 @@
             <label for="film-genre" class="custom-select">
                 <select id="film-genre">
                     <option value="" hidden>Gatunek</option>
-                    <option value="all">Wszystkie</option>
-                    <option value="horror">Horror</option>
-                    <option value="thriller">Thriller</option>
-                    <option value="romans">Romans</option>
-                    <option value="przygodowy">Przygodowy</option>
-                    <option value="kryminał">Kryminał</option>
+                    <% genres.forEach(genre => { %>
+                        <option class="capitalize" value="<%= genre %>"><%= genre %></option>
+                    <% })%>
                 </select>
             </label>
             <label for="country-production" class="custom-select">
                 <select id="country-production">
                     <option value="" hidden>Kraj produkcji</option>
-                    <option value="all">Wszystkie</option>
-                    <option value="pl">Polska</option>
-                    <option value="us">Stany Zjednoczone</option>
-                    <option value="gb">Wielka Brytania</option>
+                    <% productionCountries.forEach(country => { %>
+                        <option class="capitalize" value="<%= country %>"><%= country %></option>
+                    <% })%>
                 </select>
             </label>
         </div>
         <div class="buttons">
-            <input type="button" value="Reset" id="reset">
+            <input type="button" value="Reset" id="reset" onclick="location.assign('/')">
             <input type="button" value="Filtruj" id="filter" class="primary-button">
         </div>
     </form>
