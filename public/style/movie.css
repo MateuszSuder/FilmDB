@@ -44,13 +44,15 @@
 	right: -2rem;
 }
 
-#movie-modify {
-	height: 32px;
-	width: 32px;
-
+#movie-actions {
 	position: absolute;
 	top: 2rem;
 	right: 0rem;
+}
+
+.movie-action-button {
+	height: 32px;
+	width: 32px;
 
 	cursor: pointer;
 }

@@ -1,9 +1,22 @@
 <div id="movie-container">
-	<img
-		src="/public/assets/Repair Tool.png"
-		id="movie-modify"
-		data-movie-id="<%= movie.id %>"
-	/>
+	<% if(user && user.permission === 'admin') { %>
+	<div id="movie-actions">
+		<img
+			src="/public/assets/Repair Tool.png"
+			id="movie-modify"
+			data-movie-id="<%= movie.id %>"
+			class="movie-action-button"
+		/>
+		<img
+			src="/public/assets/Exit.svg"
+			id="movie-delete"
+			data-movie-id="<%= movie.id %>"
+			data-movie-title="<%= movie.title %>"
+			class="movie-action-button"
+		/>
+	</div>
+	<% } %>
+
 	<div id="movie-header">
 		<div class="header-primary" id="movie-title">
 			<%- include('components/favorite') %> <%= movie.title %>

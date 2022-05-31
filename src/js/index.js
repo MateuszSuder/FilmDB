@@ -34,6 +34,33 @@ const init = () => {
 	favoriteHandler();
 	actorsHandler();
 	filterHandler();
+	movieDeleteHandler();
+};
+
+const closeModal = () => {
+	$('#modal-mask').addClass('d-none');
+};
+
+const movieDeleteHandler = () => {
+	$('#movie-delete').on('click', function () {
+		const id = $(this).data('movie-id');
+		const title = $(this).data('movie-title');
+
+		openModalHandler(
+			`Usunąć ${title}?`,
+			`Czy na pewno chcesz usunąć film ${title}?`,
+			() => closeModal(),
+			() => {
+				$.ajax({
+					url: `/movie/${id}`,
+					method: 'DELETE',
+				}).done((d) => {
+					closeModal();
+					location.assign('/');
+				});
+			},
+		);
+	});
 };
 
 const filterHandler = () => {
@@ -115,10 +142,6 @@ const buttonsHandlers = () => {
 		$('#search-modal-container').addClass('d-none');
 		event.stopPropagation();
 	});
-
-	const closeModal = () => {
-		$('#modal-mask').addClass('d-none');
-	};
 
 	$('.user-action-button').on('click', function () {
 		const id = $(this).data('user-id');

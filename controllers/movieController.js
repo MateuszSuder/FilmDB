@@ -19,3 +19,12 @@ export const movieView = async (req, res) => {
 		});
 	}
 };
+
+export const deleteMovie = async (req, res) => {
+	if (req.params.id) {
+		await Movie.deleteMovie(req.params.id);
+		res.sendStatus(200);
+	} else {
+		res.sendStatus(400);
+	}
+};
