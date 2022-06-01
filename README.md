@@ -7,6 +7,7 @@
 > 
 > For the sake of keeping whole project in polish, rest of readme will be in it.
 
+## Struktura folderów
 
 ```
 FilmDB
@@ -34,4 +35,19 @@ FilmDB
     └───database - implementacja połączenia z bazom danych
     │
     └───js - folder z plikami javascriptowymi
+```
+
+## Jak uruchomić projekt
+
+1. Sklonować projekt: 
+```bash 
+git clone https://github.com/MateuszSuder/FilmDB.git
+```
+2. Wejdź do folderu i zainstaluj zależności:
+```bash
+npm install
+```
+3. Uruchom projekt (uruchamia nodemon):
+```bash
+npm run start
 ```
