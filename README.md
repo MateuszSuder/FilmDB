@@ -51,3 +51,5 @@ npm install
 ```bash
 npm run start
 ```
+
+### Design projektu - [Figma](https://www.figma.com/file/wFXEwPidgRldEL4C5AGXiH/FilmDB)
